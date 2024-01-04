@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+	@apply h-full;
+}
+
+body {
+	background-image: url('/paw-background.png');
+	background-position: center;
+}
+
+h2 {
+	@apply text-lg;
+}
+
+button {
+	outline: none;
+}
+
+svg {
+	@apply text-white text-lg;
+}
+
+.main-container {
+	@apply w-full flex flex-col items-center h-full overflow-hidden;
+}
+
+.inside-container {
+	@apply bg-green-500 my-6 p-6 shadow-card rounded flex;
+}
+
+.right-side-game-container {
+	@apply grow relative mt-6 px-6 pb-6 pt-[136px] flex flex-col justify-between items-center;
+}
+
+.menu-wrapper:hover .menu-dropdown {
+	display: flex;
+}
+
+.menu-dropdown {
+	@apply bg-green-400 hidden flex-col space-y-6 p-6 rounded text-nowrap shadow-card;
+}

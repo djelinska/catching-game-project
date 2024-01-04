@@ -63,7 +63,23 @@ module.exports = {
 				},
 			],
 		},
+		borderRadius: {
+			none: '0',
+			sm: '6px',
+			DEFAULT: '12px',
+			lg: '18px',
+			full: '9999px',
+		},
+		boxShadow: {
+			xs: 'inset 0 -3px 0 0 #a73825',
+			sm: 'inset 0 -4px 0 0',
+			DEFAULT: 'inset 0 -6px 0 0',
+			card: '0px 4px 10px 0px rgba(0, 0, 0, 0.25)',
+		},
 		extend: {},
 	},
-	plugins: [require('@tailwindcss/forms')],
+	plugins: [
+		require('@tailwindcss/forms'),
+		require('@tailwindcss/aspect-ratio'),
+	],
 };

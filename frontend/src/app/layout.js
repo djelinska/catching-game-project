@@ -19,7 +19,9 @@ export default function RootLayout({ children }) {
 			<head>
 				<link rel='icon' href='/icon.ico' sizes='any' />
 			</head>
-			<body className={`${poppins.className} font-semibold text-base`}>
+			<body
+				className={`${poppins.className} uppercase font-semibold text-base text-white bg-green-500 flex flex-col justify-center items-center`}
+			>
 				{children}
 			</body>
 		</html>
