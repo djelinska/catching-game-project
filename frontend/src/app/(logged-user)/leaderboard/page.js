@@ -55,7 +55,7 @@ const Leaderboard = () => {
 	};
 
 	return (
-		<div className='bg-green-500 flex-col space-y-6 p-6 rounded shadow-card w-full max-w-screen-xl h-full max-h-[824px]'>
+		<div className='max-w-screen-xl card-container'>
 			<h2 className='h-[68px] flex items-center'>Leaderboard</h2>
 			<div className='leaderboard-grid pl-6 pr-11'>
 				<UserStatsLabels leaderboard={true} />

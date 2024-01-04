@@ -1,6 +1,6 @@
 const FormInput = ({ icon: IconComponent, placeholder, type }) => {
 	return (
-		<div className='bg-green-300 text-green-100 flex items-center space-x-4 px-8 rounded-lg'>
+		<div className='w-full bg-green-300 text-green-100 flex items-center space-x-4 px-8 rounded-lg'>
 			{IconComponent && <IconComponent style={{ color: '#bcc9af' }} />}
 			<input
 				type={type}
