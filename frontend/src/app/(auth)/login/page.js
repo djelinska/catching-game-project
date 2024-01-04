@@ -8,7 +8,7 @@ import { PiXBold } from 'react-icons/pi';
 
 const Login = () => {
 	return (
-		<div className='inside-container flex-col gap-6 w-full max-w-2xl'>
+		<div className='flex bg-green-500 p-6 rounded shadow-card flex-col gap-6 w-full max-w-2xl'>
 			<div className='flex items-center justify-between mt-6'>
 				<h2>Login</h2>
 				<Link href='/'>

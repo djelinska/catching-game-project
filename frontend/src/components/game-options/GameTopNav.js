@@ -13,8 +13,8 @@ const GameTopNav = () => {
 			<Link href='/login'>
 				<Button label='Login' color='secondary' size='small' />
 			</Link>
-			<CurrentCatQuantity currentQuantity='0' totalQuantity='15' />
-			<CurrentSpeedChoice speed='const' />
+			{/* <CurrentCatQuantity currentQuantity='0' totalQuantity='15' />
+			<CurrentSpeedChoice speed='const' /> */}
 			{/* <Button
 				icon={PiArrowFatLeftFill}
 				color='primary'

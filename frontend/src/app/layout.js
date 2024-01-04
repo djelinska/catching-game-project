@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 
+import Navbar from '@/components/navbar/Navbar';
 import { Poppins } from 'next/font/google';
 
 const poppins = Poppins({
@@ -20,8 +21,9 @@ export default function RootLayout({ children }) {
 				<link rel='icon' href='/icon.ico' sizes='any' />
 			</head>
 			<body
-				className={`${poppins.className} uppercase font-semibold text-base text-white bg-green-500 flex flex-col justify-center items-center`}
+				className={`${poppins.className} uppercase font-semibold text-base text-white bg-green-500 flex flex-col`}
 			>
+				{true && <Navbar />}
 				{children}
 			</body>
 		</html>

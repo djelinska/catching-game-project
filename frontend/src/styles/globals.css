@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+	@apply w-3;
+}
+
+::-webkit-scrollbar-track {
+	@apply bg-green-400 rounded-sm;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-green-300 rounded-sm shadow-card;
+}
+
 html,
 body {
 	@apply h-full;
@@ -16,6 +28,14 @@ h2 {
 	@apply text-lg;
 }
 
+h3 {
+	@apply text-xs;
+}
+
+.game-stats-label {
+	@apply flex items-center justify-center text-center;
+}
+
 button {
 	outline: none;
 }
@@ -24,22 +44,20 @@ svg {
 	@apply text-white text-lg;
 }
 
-.main-container {
-	@apply w-full flex flex-col items-center h-full overflow-hidden;
-}
-
-.inside-container {
-	@apply bg-green-500 my-6 p-6 shadow-card rounded flex;
+.main-wrapper {
+	@apply w-full h-full flex justify-center items-center p-6 overflow-hidden;
 }
 
 .right-side-game-container {
 	@apply grow relative mt-6 px-6 pb-6 pt-[136px] flex flex-col justify-between items-center;
 }
 
-.menu-wrapper:hover .menu-dropdown {
-	display: flex;
+.menu-dropdown {
+	@apply bg-green-400 flex flex-col space-y-6 p-6 rounded text-nowrap shadow-card;
 }
 
-.menu-dropdown {
-	@apply bg-green-400 hidden flex-col space-y-6 p-6 rounded text-nowrap shadow-card;
+.leaderboard-grid {
+	display: grid;
+	grid-template-columns: 96px 240px repeat(5, 1fr);
+	gap: 0.5rem;
 }
