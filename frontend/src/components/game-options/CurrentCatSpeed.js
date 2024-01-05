@@ -2,7 +2,7 @@ import { PiArrowsHorizontalFill } from 'react-icons/pi';
 import { PiShuffleSimpleFill } from 'react-icons/pi';
 import { PiTrendDownFill } from 'react-icons/pi';
 
-const CurrentSpeedChoice = ({ speed }) => {
+const CurrentCatSpeed = ({ speed }) => {
 	return (
 		<div className='flex items-center space-x-4 text-lg'>
 			{speed === 'const' ? (
@@ -17,4 +17,4 @@ const CurrentSpeedChoice = ({ speed }) => {
 	);
 };
 
-export default CurrentSpeedChoice;
+export default CurrentCatSpeed;

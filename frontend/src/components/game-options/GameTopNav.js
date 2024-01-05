@@ -1,6 +1,6 @@
 import Button from '../Button';
 import CurrentCatQuantity from './CurrentCatQuantity';
-import CurrentSpeedChoice from './CurrentSpeedChoice';
+import CurrentCatSpeed from './CurrentCatSpeed';
 import Link from 'next/link';
 import { PiArrowFatLeftFill } from 'react-icons/pi';
 
@@ -13,8 +13,8 @@ const GameTopNav = () => {
 			<Link href='/login'>
 				<Button label='Login' color='secondary' size='small' />
 			</Link>
-			{/* <CurrentCatQuantity currentQuantity='0' totalQuantity='15' />
-			<CurrentSpeedChoice speed='const' /> */}
+			<CurrentCatQuantity currentQuantity='0' totalQuantity='15' />
+			<CurrentCatSpeed speed='const' />
 			{/* <Button
 				icon={PiArrowFatLeftFill}
 				color='primary'
