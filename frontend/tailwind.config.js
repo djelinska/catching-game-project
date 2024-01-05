@@ -76,7 +76,11 @@ module.exports = {
 			DEFAULT: 'inset 0 -6px 0 0',
 			card: '0px 4px 10px 0px rgba(0, 0, 0, 0.25)',
 		},
-		extend: {},
+		extend: {
+			borderWidth: {
+				3: '3px',
+			},
+		},
 	},
 	plugins: [
 		require('@tailwindcss/forms'),

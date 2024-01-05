@@ -1,5 +1,5 @@
-import ChallengeRequest from '@/components/notifications/ChallengeRequest';
-import ChallengeResult from '@/components/notifications/ChallengeResult';
+import ChallengeRequestNotification from '@/components/notifications/ChallengeRequestNotification';
+import ChallengeResultNotification from '@/components/notifications/ChallengeResultNotification';
 import FriendRequest from '@/components/notifications/FriendRequest';
 
 const Notifications = () => {
@@ -8,8 +8,8 @@ const Notifications = () => {
 			<h2 className='h-[68px] flex items-center'>Notifications</h2>
 			<div className='flex flex-col space-y-4 max-h-[660px] overflow-y-scroll'>
 				<FriendRequest />
-				<ChallengeRequest />
-				<ChallengeResult win={true} />
+				<ChallengeRequestNotification />
+				<ChallengeResultNotification win={true} />
 			</div>
 		</div>
 	);

@@ -52,6 +52,10 @@ svg {
 	@apply bg-green-500 flex-col space-y-6 p-6 rounded shadow-card h-fit max-h-[824px];
 }
 
+.card-container-horizontal {
+	@apply bg-green-500 flex space-x-6 p-6 rounded shadow-card h-fit max-h-[824px];
+}
+
 .right-side-game-container {
 	@apply grow relative mt-6 px-6 pb-6 pt-[136px] flex flex-col justify-between items-center;
 }
