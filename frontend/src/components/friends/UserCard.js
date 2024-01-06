@@ -4,19 +4,18 @@ import Button from '../Button';
 import Link from 'next/link';
 import { PiSwordFill } from 'react-icons/pi';
 import { PiUserFill } from 'react-icons/pi';
+import UsernameDisplay from '../UsernameDisplay';
 
-const FriendCard = ({ username }) => {
+const UserCard = ({ username }) => {
 	return (
 		<div className='bg-green-400 w-full p-6 rounded'>
-			<div className='flex items-center space-x-6 mb-6'>
-				<div className='bg-green-100 p-4 rounded w-fit'>
-					<PiUserFill style={{ fontSize: '32px' }} />
-				</div>
-				<Link href={`/profile/${username}`}>
-					<p>{username}</p>
-				</Link>
-			</div>
-			<div className='flex space-x-6'>
+			<UsernameDisplay
+				username={username}
+				iconBackground={true}
+				size='large'
+				profilePath={true}
+			/>
+			<div className='flex space-x-6 mt-6'>
 				<Button
 					label='Challenge'
 					icon={PiSwordFill}
@@ -25,8 +24,14 @@ const FriendCard = ({ username }) => {
 				/>
 				<Button icon={PiChatCenteredFill} color='secondary' size='small' />
 			</div>
+			{/* <Button
+				label='Add As Friend'
+				icon={PiPlusBold}
+				color='secondary'
+				size='small'
+			/> */}
 		</div>
 	);
 };
 
-export default FriendCard;
+export default UserCard;

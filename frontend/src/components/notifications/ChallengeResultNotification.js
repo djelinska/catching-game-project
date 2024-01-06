@@ -4,7 +4,7 @@ import { PiArrowsHorizontalFill } from 'react-icons/pi';
 import { PiCatFill } from 'react-icons/pi';
 import { PiShuffleSimpleFill } from 'react-icons/pi';
 import { PiTrendDownFill } from 'react-icons/pi';
-import Username from './Username';
+import UsernameDisplay from '../UsernameDisplay';
 
 const ChallengeResultNotification = ({ win }) => {
 	return (
@@ -15,7 +15,7 @@ const ChallengeResultNotification = ({ win }) => {
 			</div>
 			<div className='flex items-center space-x-6'>
 				<p>You {win ? 'won' : 'lost'} the challenge with</p>
-				<Username username='Username' />
+				<UsernameDisplay username={'user'} size='large' />
 			</div>
 		</div>
 	);

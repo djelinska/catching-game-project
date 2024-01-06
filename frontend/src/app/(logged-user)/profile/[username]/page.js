@@ -4,6 +4,7 @@ import Button from '@/components/Button';
 import ProfileLeaderboardPosition from '@/components/profile/ProfileLeaderboardPosition';
 import TotalScore from '@/components/game-options/TotalScore';
 import UserStatsLabels from '@/components/UserStatsLabels';
+import UsernameDisplay from '@/components/UsernameDisplay';
 
 const Profile = ({ params }) => {
 	const username = params.username;
@@ -23,13 +24,12 @@ const Profile = ({ params }) => {
 		<div className='card-container max-w-screen-xl'>
 			<h2 className='h-[68px] flex items-center'>Profile</h2>
 			<div className='bg-green-400 p-6 rounded flex flex-col gap-6 items-center'>
-				<div className='flex items-center gap-6'>
-					<div className='bg-green-100 p-4 rounded w-fit'>
-						<PiUserFill />
-					</div>
-					<p>{username}</p>
-					<p className='text-xs'>Joined {joinDate}</p>
-				</div>
+				<UsernameDisplay
+					username={username}
+					iconBackground={true}
+					size='large'
+					date={joinDate}
+				/>
 				<TotalScore />
 				<ProfileLeaderboardPosition />
 				<Button

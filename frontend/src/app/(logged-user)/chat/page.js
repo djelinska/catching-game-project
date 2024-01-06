@@ -5,8 +5,8 @@ import ChallengeRequestMessage from '@/components/chat/ChallengeRequestMessage';
 import ChallengeResultMessage from '@/components/chat/ChallengeResultMessage';
 import ChatUsernamesList from '@/components/chat/ChatUsernamesList';
 import FormInput from '@/components/FormInput';
-import MessageInfo from '@/components/chat/MessageInfo';
 import SimpleMessage from '@/components/chat/SimpleMessage';
+import UsernameDisplay from '@/components/UsernameDisplay';
 
 const Chat = () => {
 	const messages = [
@@ -79,10 +79,13 @@ const Chat = () => {
 								message.friendMessage ? 'items-start' : 'items-end'
 							}`}
 						>
-							<MessageInfo
-								isFriendMessage={message.friendMessage}
+							<UsernameDisplay
 								username={message.username}
+								iconBackground={true}
+								size='small'
 								time={message.time}
+								reversed={!message.friendMessage}
+								profilePath={true}
 							/>
 							{message.type === 'simpleMessage' ? (
 								<SimpleMessage
