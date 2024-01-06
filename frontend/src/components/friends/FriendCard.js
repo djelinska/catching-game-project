@@ -1,5 +1,7 @@
+import { PiChatCenteredFill, PiPlusBold } from 'react-icons/pi';
+
 import Button from '../Button';
-import { PiChatCenteredFill } from 'react-icons/pi';
+import Link from 'next/link';
 import { PiSwordFill } from 'react-icons/pi';
 import { PiUserFill } from 'react-icons/pi';
 
@@ -10,7 +12,9 @@ const FriendCard = ({ username }) => {
 				<div className='bg-green-100 p-4 rounded w-fit'>
 					<PiUserFill style={{ fontSize: '32px' }} />
 				</div>
-				<span>{username}</span>
+				<Link href={`/profile/${username}`}>
+					<p>{username}</p>
+				</Link>
 			</div>
 			<div className='flex space-x-6'>
 				<Button

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { PiUserFill } from 'react-icons/pi';
 
 const MessageInfo = ({ isFriendMessage, username, time }) => {
@@ -10,7 +11,9 @@ const MessageInfo = ({ isFriendMessage, username, time }) => {
 			<div className='bg-green-100 p-2 rounded-sm'>
 				<PiUserFill style={{ fontSize: '20px' }} />
 			</div>
-			<p>{username}</p>
+			<Link href={`/profile/${username}`}>
+				<p>{username}</p>
+			</Link>
 			<span className='text-xs'>{time}</span>
 		</div>
 	);

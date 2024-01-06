@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { PiUserFill } from 'react-icons/pi';
 
 const LeaderboardPosition = ({
@@ -16,7 +17,9 @@ const LeaderboardPosition = ({
 				<div className='bg-green-100 p-2 rounded-sm'>
 					<PiUserFill style={{ fontSize: '20px' }} />
 				</div>
-				<p>{username}</p>
+				<Link href={`/profile/${username}`}>
+					<p>{username}</p>
+				</Link>
 			</div>
 			<p className='text-center'>{playCount}</p>
 			<p className='text-center text-yellow-light'>{totalScore}</p>
