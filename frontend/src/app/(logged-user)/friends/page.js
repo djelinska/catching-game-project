@@ -42,7 +42,7 @@ const Friends = () => {
 	];
 
 	return (
-		<div className='max-w-screen-xl card-container'>
+		<div className='card-container'>
 			<div className='flex justify-between space-x-6'>
 				<h2>Friends</h2>
 				<Link href='/friends/add'>
@@ -62,7 +62,9 @@ const Friends = () => {
 				/>
 				<Button label='Search' color='secondary' size='large' />
 			</div>
-			<UsersList users={friendUsers} />
+			<div className='max-h-[576px] overflow-y-scroll'>
+				<UsersList users={friendUsers} />
+			</div>
 		</div>
 	);
 };

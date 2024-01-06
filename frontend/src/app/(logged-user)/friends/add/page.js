@@ -5,7 +5,7 @@ import FormInput from '@/components/FormInput';
 
 const AddFriends = () => {
 	return (
-		<div className='w-full max-w-screen-xl card-container'>
+		<div className='card-container'>
 			<h2 className='h-[68px] flex items-center'>Add Friends</h2>
 			<div className='flex space-x-6'>
 				<FormInput

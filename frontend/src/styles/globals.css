@@ -49,11 +49,11 @@ svg {
 }
 
 .card-container {
-	@apply bg-green-500 flex-col space-y-6 p-6 rounded shadow-card h-fit max-h-[824px];
+	@apply bg-green-500 flex-col space-y-6 p-6 rounded shadow-card max-h-[824px] w-full max-w-screen-xl;
 }
 
 .card-container-horizontal {
-	@apply bg-green-500 flex space-x-6 p-6 rounded shadow-card h-fit max-h-[824px];
+	@apply bg-green-500 flex space-x-6 p-6 rounded shadow-card max-h-[824px] w-full max-w-screen-xl;
 }
 
 .right-side-game-container {

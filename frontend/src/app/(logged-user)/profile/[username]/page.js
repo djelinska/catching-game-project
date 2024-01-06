@@ -21,7 +21,7 @@ const Profile = ({ params }) => {
 	const joinDate = 'January 2024';
 
 	return (
-		<div className='card-container max-w-screen-xl'>
+		<div className='card-container'>
 			<h2 className='h-[68px] flex items-center'>Profile</h2>
 			<div className='bg-green-400 p-6 rounded flex flex-col gap-6 items-center'>
 				<UsernameDisplay

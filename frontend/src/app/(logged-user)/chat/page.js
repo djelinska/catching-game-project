@@ -65,52 +65,54 @@ const Chat = () => {
 	const startedChatsUsernames = ['friend1', 'friend2'];
 
 	return (
-		<div className='card-container-horizontal w-full max-w-screen-xl'>
+		<div className='card-container-horizontal'>
 			<div className='min-w-80'>
 				<h2 className='h-[68px] flex items-center'>Chat</h2>
 				<ChatUsernamesList startedChatsUsernames={startedChatsUsernames} />
 			</div>
-			<div className='w-full'>
-				<div className='messages-container flex flex-col space-y-6 max-h-[668px] overflow-y-scroll pb-3'>
-					{messages.map((message, index) => (
-						<div
-							key={index}
-							className={`flex flex-col space-y-4 mr-2 ${
-								message.friendMessage ? 'items-start' : 'items-end'
-							}`}
-						>
-							<UsernameDisplay
-								username={message.username}
-								iconBackground={true}
-								size='small'
-								time={message.time}
-								reversed={!message.friendMessage}
-								profilePath={true}
-							/>
-							{message.type === 'simpleMessage' ? (
-								<SimpleMessage
-									isFriendMessage={message.friendMessage}
-									body={message.body}
+			<div className='w-full flex flex-col justify-end'>
+				{messages.length > 0 && (
+					<div className='flex flex-col space-y-6 max-h-[668px] overflow-y-scroll pb-3'>
+						{messages.map((message, index) => (
+							<div
+								key={index}
+								className={`flex flex-col space-y-4 mr-2 ${
+									message.friendMessage ? 'items-start' : 'items-end'
+								}`}
+							>
+								<UsernameDisplay
+									username={message.username}
+									iconBackground={true}
+									size='small'
+									time={message.time}
+									reversed={!message.friendMessage}
+									profilePath={true}
 								/>
-							) : message.type === 'challengeReq' ? (
-								<ChallengeRequestMessage
-									isFriendMessage={message.friendMessage}
-									challQuantity={message.challQuan}
-									challSpeed={message.challSpeed}
-								/>
-							) : (
-								<ChallengeResultMessage
-									isFriendMessage={message.friendMessage}
-									challQuantity={message.challQuan}
-									challSpeed={message.challSpeed}
-									challengeWin={message.challengeWin}
-									challScore={message.challScore}
-									challBonus={message.challBonus}
-								/>
-							)}
-						</div>
-					))}
-				</div>
+								{message.type === 'simpleMessage' ? (
+									<SimpleMessage
+										isFriendMessage={message.friendMessage}
+										body={message.body}
+									/>
+								) : message.type === 'challengeReq' ? (
+									<ChallengeRequestMessage
+										isFriendMessage={message.friendMessage}
+										challQuantity={message.challQuan}
+										challSpeed={message.challSpeed}
+									/>
+								) : (
+									<ChallengeResultMessage
+										isFriendMessage={message.friendMessage}
+										challQuantity={message.challQuan}
+										challSpeed={message.challSpeed}
+										challengeWin={message.challengeWin}
+										challScore={message.challScore}
+										challBonus={message.challBonus}
+									/>
+								)}
+							</div>
+						))}
+					</div>
+				)}
 				<div className='bg-green-500 pt-4 flex items-center space-x-6'>
 					<FormInput placeholder='Write message' type='text' />
 					<Button icon={PiSwordFill} color='secondary' size='large' />
