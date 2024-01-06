@@ -15,18 +15,21 @@ const Login = () => {
 					<IconButton icon={PiXBold} />
 				</Link>
 			</div>
-			<FormInput icon={PiUserFill} placeholder='Username' type='text' />
-			<FormInput
-				icon={PiLockSimpleFill}
-				placeholder='Password'
-				type='password'
-			/>
-			<Button
-				label='Login'
-				color='primary'
-				size='large'
-				additionalStyles='w-full'
-			/>
+			<form className='flex flex-col space-y-6' method='post'>
+				<FormInput icon={PiUserFill} placeholder='Username' type='text' />
+				<FormInput
+					icon={PiLockSimpleFill}
+					placeholder='Password'
+					type='password'
+				/>
+				<Button
+					typeSubmit={true}
+					label='Login'
+					color='primary'
+					size='large'
+					additionalStyles='w-full'
+				/>
+			</form>
 			<p className='text-center mb-6'>
 				Or{' '}
 				<Link href='/register' className='underline'>

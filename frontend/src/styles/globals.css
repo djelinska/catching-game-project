@@ -48,6 +48,10 @@ svg {
 	@apply w-full h-full flex justify-center items-center p-6 overflow-hidden;
 }
 
+.card-container-fit {
+	@apply bg-green-500 flex-col space-y-6 p-6 rounded shadow-card;
+}
+
 .card-container {
 	@apply bg-green-500 flex-col space-y-6 p-6 rounded shadow-card max-h-[824px] w-full max-w-screen-xl;
 }

@@ -4,7 +4,7 @@ import Button from '@/components/Button';
 import ChallengeRequestMessage from '@/components/chat/ChallengeRequestMessage';
 import ChallengeResultMessage from '@/components/chat/ChallengeResultMessage';
 import ChatUsernamesList from '@/components/chat/ChatUsernamesList';
-import FormInput from '@/components/FormInput';
+import MessageInput from '@/components/chat/MessageInput';
 import SimpleMessage from '@/components/chat/SimpleMessage';
 import UsernameDisplay from '@/components/UsernameDisplay';
 
@@ -114,7 +114,7 @@ const Chat = () => {
 					</div>
 				)}
 				<div className='bg-green-500 pt-4 flex items-center space-x-6'>
-					<FormInput placeholder='Write message' type='text' />
+					<MessageInput />
 					<Button icon={PiSwordFill} color='secondary' size='large' />
 					<Button icon={PiPaperPlaneRightFill} color='primary' size='large' />
 				</div>

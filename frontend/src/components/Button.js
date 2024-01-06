@@ -1,4 +1,5 @@
 const Button = ({
+	typeSubmit,
 	label,
 	icon: IconComponent,
 	color,
@@ -26,7 +27,10 @@ const Button = ({
 
 	return (
 		<div>
-			<button className={`shadow bg-${color} ${style}`}>
+			<button
+				className={`shadow bg-${color} ${style}`}
+				type={typeSubmit ? 'submit' : 'button'}
+			>
 				<div className='flex items-center justify-center space-x-4 min-h-9'>
 					{IconComponent && <IconComponent />}
 					{label && (
