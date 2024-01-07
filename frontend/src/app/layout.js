@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 
+import GameProvider from '@/components/GameProvider';
 import Navbar from '@/components/navbar/Navbar';
 import { Poppins } from 'next/font/google';
 
@@ -23,8 +24,10 @@ export default function RootLayout({ children }) {
 			<body
 				className={`${poppins.className} uppercase font-semibold text-base text-white bg-green-500 flex flex-col`}
 			>
-				{true && <Navbar />}
-				{children}
+				<GameProvider>
+					{true && <Navbar />}
+					{children}
+				</GameProvider>
 			</body>
 		</html>
 	);

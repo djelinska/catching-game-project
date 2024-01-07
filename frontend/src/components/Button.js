@@ -5,6 +5,7 @@ const Button = ({
 	color,
 	size,
 	additionalStyles,
+	onClickAction,
 }) => {
 	const colors = {
 		primary: 'bg-yellow-light shadow-yellow-dark',
@@ -30,6 +31,7 @@ const Button = ({
 			<button
 				className={`shadow bg-${color} ${style}`}
 				type={typeSubmit ? 'submit' : 'button'}
+				onClick={onClickAction}
 			>
 				<div className='flex items-center justify-center space-x-4 min-h-9'>
 					{IconComponent && <IconComponent />}
