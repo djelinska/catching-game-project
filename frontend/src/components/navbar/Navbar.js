@@ -7,17 +7,16 @@ import MenuDropdown from './MenuDropdown';
 import NavbarLinks from './NavbarLinks';
 import { PiPlayFill } from 'react-icons/pi';
 import { PiSquaresFourFill } from 'react-icons/pi';
-import { useGame } from '../GameProvider';
+import { useGameInfo } from '../GameProvider';
 import { useState } from 'react';
 
 const Navbar = () => {
 	const [visibleDropdown, setVisibleDropdown] = useState(false);
+	const { state, getNewGame } = useGameInfo();
 
-	const displayMenuDropdown = () => {
+	function displayMenuDropdown() {
 		setVisibleDropdown((prevVisibleDropdown) => !prevVisibleDropdown);
-	};
-
-	const { isGameStarted, getNewGame } = useGame();
+	}
 
 	return (
 		<nav className='w-full bg-green-500 flex items-center justify-between space-x-6 px-32 py-6 shadow-card'>
@@ -28,7 +27,7 @@ const Navbar = () => {
 					color='primary'
 					size='small'
 					onClickAction={() => {
-						if (!isGameStarted) {
+						if (!state.isGameStarted) {
 							getNewGame();
 						}
 					}}

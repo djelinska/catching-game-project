@@ -1,10 +1,13 @@
 import { PiHeartBreakFill } from 'react-icons/pi';
 import { PiHeartFill } from 'react-icons/pi';
+import { useGameInfo } from '../GameProvider';
 
-const Hearts = ({ heartsLeft }) => {
+const Hearts = () => {
+	const { state } = useGameInfo();
+
 	return (
 		<div className='flex space-x-6'>
-			{heartsLeft === 0 ? (
+			{state.hearts === 0 ? (
 				<PiHeartBreakFill style={{ fontSize: '40px', color: '#d1462f' }} />
 			) : (
 				[...Array(3)].map((heart, index) => (
@@ -12,7 +15,7 @@ const Hearts = ({ heartsLeft }) => {
 						key={index}
 						style={{
 							fontSize: '40px',
-							color: heartsLeft > index ? '#d1462f' : '#3f7267',
+							color: state.hearts > index ? '#d1462f' : '#3f7267',
 						}}
 					/>
 				))

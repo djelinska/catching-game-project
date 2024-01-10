@@ -2,27 +2,27 @@ import GameChoiceButton from './GameChoiceButton';
 import { PiArrowsHorizontalFill } from 'react-icons/pi';
 import { PiShuffleSimpleFill } from 'react-icons/pi';
 import { PiTrendDownFill } from 'react-icons/pi';
-import { useGame } from '../GameProvider';
+import { useGameInfo } from '../GameProvider';
 
 const GameChoiceSpeed = () => {
-	const { setGameSpeed } = useGame();
+	const { setCatSpeed } = useGameInfo();
 
 	return (
 		<div className='grid grid-rows-3 gap-6'>
 			<GameChoiceButton
 				icon={PiArrowsHorizontalFill}
 				label='Constant Speed'
-				onClickAction={() => setGameSpeed('const')}
+				onClickAction={() => setCatSpeed('const')}
 			/>
 			<GameChoiceButton
 				icon={PiTrendDownFill}
 				label='Decreasing Speed'
-				onClickAction={() => setGameSpeed('dec')}
+				onClickAction={() => setCatSpeed('dec')}
 			/>
 			<GameChoiceButton
 				icon={PiShuffleSimpleFill}
 				label='Random Speed'
-				onClickAction={() => setGameSpeed('rand')}
+				onClickAction={() => setCatSpeed('rand')}
 			/>
 		</div>
 	);
