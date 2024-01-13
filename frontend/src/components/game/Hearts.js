@@ -1,6 +1,6 @@
 import { PiHeartBreakFill } from 'react-icons/pi';
 import { PiHeartFill } from 'react-icons/pi';
-import { useGameInfo } from '../GameProvider';
+import { useGameInfo } from '../../contexts/GameProvider';
 
 const Hearts = () => {
 	const { state } = useGameInfo();

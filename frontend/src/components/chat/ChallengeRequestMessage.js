@@ -5,7 +5,7 @@ import {
 	PiTrendDownFill,
 } from 'react-icons/pi';
 
-import Button from '../Button';
+import Button from '../common/Button';
 import ChallengeGameChoice from '../notifications/ChallengeGameChoice';
 
 const ChallengeRequestMessage = ({

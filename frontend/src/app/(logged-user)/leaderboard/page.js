@@ -1,5 +1,5 @@
 import LeaderboardPosition from '@/components/leaderboard/LeaderboardPosition';
-import UserStatsLabels from '@/components/UserStatsLabels';
+import UserStatsLabels from '@/components/common/UserStatsLabels';
 
 const Leaderboard = () => {
 	const leaderboardUsers = [

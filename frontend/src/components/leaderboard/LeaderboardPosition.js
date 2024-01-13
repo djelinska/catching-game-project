@@ -1,4 +1,4 @@
-import UsernameDisplay from '../UsernameDisplay';
+import UsernameDisplay from '../common/UsernameDisplay';
 
 const LeaderboardPosition = ({
 	position,

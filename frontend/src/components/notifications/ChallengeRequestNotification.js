@@ -1,10 +1,10 @@
-import Button from '../Button';
+import Button from '../common/Button';
 import ChallengeGameChoice from './ChallengeGameChoice';
 import { PiArrowsHorizontalFill } from 'react-icons/pi';
 import { PiCatFill } from 'react-icons/pi';
 import { PiShuffleSimpleFill } from 'react-icons/pi';
 import { PiTrendDownFill } from 'react-icons/pi';
-import UsernameDisplay from '../UsernameDisplay';
+import UsernameDisplay from '../common/UsernameDisplay';
 
 const ChallengeRequestNotification = () => {
 	return (

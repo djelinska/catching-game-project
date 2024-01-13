@@ -1,13 +1,13 @@
 'use client';
 
-import Button from '../Button';
-import IconButton from '../IconButton';
+import Button from '../common/Button';
+import IconButton from '../common/IconButton';
 import Link from 'next/link';
 import MenuDropdown from './MenuDropdown';
 import NavbarLinks from './NavbarLinks';
 import { PiPlayFill } from 'react-icons/pi';
 import { PiSquaresFourFill } from 'react-icons/pi';
-import { useGameInfo } from '../GameProvider';
+import { useGameInfo } from '../../contexts/GameProvider';
 import { useState } from 'react';
 
 const Navbar = () => {

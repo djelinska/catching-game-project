@@ -1,5 +1,5 @@
-import Button from '../Button';
-import UsernameDisplay from '../UsernameDisplay';
+import Button from '../common/Button';
+import UsernameDisplay from '../common/UsernameDisplay';
 
 const FriendRequest = () => {
 	return (

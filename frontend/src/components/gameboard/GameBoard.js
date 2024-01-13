@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import CatTile from './CatTile';
 import Tile from './Tile';
-import { useGameInfo } from '../GameProvider';
+import { useGameInfo } from '../../contexts/GameProvider';
 
 const GameBoard = () => {
 	const { state, setCurrentIteration, setHearts, gameEnd, checkWin } =

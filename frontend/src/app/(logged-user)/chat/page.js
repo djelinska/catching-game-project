@@ -1,12 +1,12 @@
 import { PiPaperPlaneRightFill, PiSwordFill } from 'react-icons/pi';
 
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import ChallengeRequestMessage from '@/components/chat/ChallengeRequestMessage';
 import ChallengeResultMessage from '@/components/chat/ChallengeResultMessage';
 import ChatUsernamesList from '@/components/chat/ChatUsernamesList';
 import MessageInput from '@/components/chat/MessageInput';
 import SimpleMessage from '@/components/chat/SimpleMessage';
-import UsernameDisplay from '@/components/UsernameDisplay';
+import UsernameDisplay from '@/components/common/UsernameDisplay';
 
 const Chat = () => {
 	const messages = [

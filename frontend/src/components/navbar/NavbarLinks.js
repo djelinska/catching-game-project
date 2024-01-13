@@ -1,4 +1,4 @@
-import IconButton from '../IconButton';
+import IconButton from '../common/IconButton';
 import Link from 'next/link';
 import { PiBellSimpleFill } from 'react-icons/pi';
 import { PiChatCenteredFill } from 'react-icons/pi';

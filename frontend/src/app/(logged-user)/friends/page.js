@@ -1,7 +1,7 @@
 import { PiMagnifyingGlassFill, PiPlusBold } from 'react-icons/pi';
 
-import Button from '@/components/Button';
-import FormInput from '@/components/FormInput';
+import Button from '@/components/common/Button';
+import FormInput from '@/components/form/FormInput';
 import Link from 'next/link';
 import UsersList from '@/components/friends/UsersList';
 

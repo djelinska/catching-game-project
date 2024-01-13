@@ -2,7 +2,7 @@ import GameChoiceButton from './GameChoiceButton';
 import { PiArrowsHorizontalFill } from 'react-icons/pi';
 import { PiShuffleSimpleFill } from 'react-icons/pi';
 import { PiTrendDownFill } from 'react-icons/pi';
-import { useGameInfo } from '../GameProvider';
+import { useGameInfo } from '../../contexts/GameProvider';
 
 const GameChoiceSpeed = () => {
 	const { setCatSpeed } = useGameInfo();

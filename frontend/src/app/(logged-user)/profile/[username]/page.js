@@ -1,10 +1,10 @@
 import { PiPlusBold, PiUserFill, PiUsersFill } from 'react-icons/pi';
 
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import ProfileLeaderboardPosition from '@/components/profile/ProfileLeaderboardPosition';
-import TotalScore from '@/components/game-options/TotalScore';
-import UserStatsLabels from '@/components/UserStatsLabels';
-import UsernameDisplay from '@/components/UsernameDisplay';
+import TotalScore from '@/components/game/TotalScore';
+import UserStatsLabels from '@/components/common/UserStatsLabels';
+import UsernameDisplay from '@/components/common/UsernameDisplay';
 
 const Profile = ({ params }) => {
 	const username = params.username;

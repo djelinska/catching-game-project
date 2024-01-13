@@ -1,10 +1,10 @@
 import { PiChatCenteredFill, PiPlusBold } from 'react-icons/pi';
 
-import Button from '../Button';
+import Button from '../common/Button';
 import Link from 'next/link';
 import { PiSwordFill } from 'react-icons/pi';
 import { PiUserFill } from 'react-icons/pi';
-import UsernameDisplay from '../UsernameDisplay';
+import UsernameDisplay from '../common/UsernameDisplay';
 
 const UserCard = ({ username }) => {
 	return (

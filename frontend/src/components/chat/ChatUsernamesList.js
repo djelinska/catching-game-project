@@ -1,5 +1,5 @@
 import { PiUserFill } from 'react-icons/pi';
-import UsernameDisplay from '../UsernameDisplay';
+import UsernameDisplay from '../common/UsernameDisplay';
 
 const ChatUsernamesList = ({ startedChatsUsernames }) => {
 	return (

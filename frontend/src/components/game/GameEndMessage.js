@@ -1,4 +1,4 @@
-import { useGameInfo } from '../GameProvider';
+import { useGameInfo } from '../../contexts/GameProvider';
 
 const GameEndMessage = () => {
 	const { state } = useGameInfo();

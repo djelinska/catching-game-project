@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { PiCatFill } from 'react-icons/pi';
-import { useGameInfo } from '../GameProvider';
+import { useGameInfo } from '../../contexts/GameProvider';
 
 const CatTile = () => {
 	const { state, catCollected } = useGameInfo();

@@ -1,6 +1,6 @@
 import GameChoiceButton from './GameChoiceButton';
 import { PiCatFill } from 'react-icons/pi';
-import { useGameInfo } from '../GameProvider';
+import { useGameInfo } from '../../contexts/GameProvider';
 
 const GameChoiceQuantity = () => {
 	const quantities = [5, 15, 30, 45, 75, 99];
