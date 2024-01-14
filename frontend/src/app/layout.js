@@ -1,9 +1,9 @@
 import '../styles/globals.css';
 
+import AuthProvider from '@/contexts/AuthProvider';
 import GameProvider from '@/contexts/GameProvider';
 import Navbar from '@/components/navbar/Navbar';
 import { Poppins } from 'next/font/google';
-import AuthProvider from '@/contexts/AuthProvider';
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
 			>
 				<AuthProvider>
 					<GameProvider>
-						{true && <Navbar />}
+						<Navbar />
 						{children}
 					</GameProvider>
 				</AuthProvider>

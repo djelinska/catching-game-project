@@ -1,25 +1,18 @@
 'use client';
 
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
-
-const initialUserState = {
-	username: '',
-	password: '',
-};
 
 function authReducer(state, action) {
 	switch (action.type) {
 		case 'LOGIN_USER':
 			return {
-				...state,
-				username: action.username,
-				password: action.password,
+				user: action.payload,
 			};
 		case 'LOGOUT_USER':
-			return initialUserState;
+			return { user: null };
 		default:
 			return state;
 	}
@@ -27,15 +20,21 @@ function authReducer(state, action) {
 
 const AuthProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(authReducer, {
-		username: '',
-		password: '',
+		user: null,
 	});
 
-	function loginUser(username, password) {
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem('user'));
+
+		if (user) {
+			loginUser(user);
+		}
+	}, []);
+
+	function loginUser(user) {
 		dispatch({
 			type: 'LOGIN_USER',
-			username: username,
-			password: password,
+			payload: user,
 		});
 	}
 
@@ -44,7 +43,7 @@ const AuthProvider = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ state, loginUser, logoutUser }}>
+		<AuthContext.Provider value={{ ...state, loginUser, logoutUser }}>
 			{children}
 		</AuthContext.Provider>
 	);

@@ -60,7 +60,11 @@ const Login = () => {
 					<IconButton icon={PiXBold} />
 				</Link>
 			</div>
-			<form className='flex flex-col space-y-6' onSubmit={handleSubmit}>
+			<form
+				className='flex flex-col space-y-6'
+				onSubmit={handleSubmit}
+				method='POST'
+			>
 				<FormInput
 					icon={PiUserFill}
 					placeholder='Username'

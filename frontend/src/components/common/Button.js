@@ -38,7 +38,7 @@ const Button = ({
 					{label && (
 						<p
 							className={
-								'uppercase text-base text-white font-semibold text-nowrap'
+								'uppercase text-base text-white font-semibold text-nowrap whitespace-nowrap'
 							}
 						>
 							{label}

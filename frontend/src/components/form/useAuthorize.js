@@ -34,7 +34,7 @@ const useAuthorize = () => {
 			}
 		} else {
 			localStorage.setItem('user', JSON.stringify(responseBody));
-			loginUser(formData.username, formData.password);
+			loginUser(responseBody);
 			setIsLoading(false);
 		}
 	};
