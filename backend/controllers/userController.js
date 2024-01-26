@@ -117,6 +117,16 @@ const deleteUserAccount = async (req, res) => {
 			return res.status(400).json({ error: 'No option to delete a user' });
 		}
 
+		await User.updateMany(
+			{ 'friends.user_id': req.user._id },
+			{ $pull: { friends: { user_id: req.user._id } } }
+		);
+
+		await User.updateMany(
+			{ 'notifications.user_id': req.user._id },
+			{ $pull: { notifications: { user_id: req.user._id } } }
+		);
+
 		await User.findByIdAndDelete(req.user._id);
 
 		res.status(200).json({ message: 'The account has been deleted' });
@@ -147,13 +157,24 @@ const searchUsers = async (req, res) => {
 
 const getUser = async (req, res) => {
 	try {
-		const user = await User.findById(req.params.id);
+		const user = await User.aggregate([
+			{ $match: { username: req.params.username } },
+			{
+				$project: {
+					username: 1,
+					stats: 1,
+					createdAt: 1,
+					month: { $month: '$createdAt' },
+					year: { $year: '$createdAt' },
+				},
+			},
+		]);
 
 		if (!user) {
 			return res.status(404).json({ error: 'User not found' });
 		}
 
-		res.status(200).json(user);
+		res.status(200).json(user[0]);
 	} catch (error) {
 		console.log(error.message);
 		res.status(500).json({ error: 'Something went wrong' });
@@ -342,7 +363,7 @@ const saveGameScore = async (req, res) => {
 		const { score, gameType } = req.body;
 		const user = await User.findById(req.user._id);
 
-		if (isNaN(score) || parseInt(score) < 1) {
+		if (isNaN(score) || parseInt(score) < 0) {
 			return res.status(400).json({ error: 'Invalid score' });
 		}
 

@@ -2,7 +2,9 @@
 
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
+import { useAuthContext } from './AuthProvider';
 import { usePathname } from 'next/navigation';
+import useUpdate from '@/hooks/useUpdate';
 
 const GameContext = createContext();
 export const useGameInfo = () => useContext(GameContext);
@@ -85,12 +87,29 @@ function gameReducer(state, action) {
 const GameProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(gameReducer, initialGameState);
 	const pathname = usePathname();
+	const { updateData } = useUpdate();
+	const { user } = useAuthContext();
 
 	useEffect(() => {
 		if (pathname !== '/') {
 			dispatch({ type: 'RESET_STATE' });
 		}
 	}, [pathname]);
+
+	useEffect(() => {
+		const recordGameScore = async () => {
+			const score = state.isWin ? state.collectedCats : 0;
+
+			await updateData('game/update', {
+				score: score,
+				gameType: `${state.gameOptions.speed}_speed_total_score`,
+			});
+		};
+
+		if (user && state.isGameEnded) {
+			recordGameScore();
+		}
+	}, [user, state.isGameEnded, state.isWin]);
 
 	function getNewGame() {
 		dispatch({ type: 'RESET_STATE' });

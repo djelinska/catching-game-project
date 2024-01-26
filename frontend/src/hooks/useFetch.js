@@ -10,6 +10,8 @@ const useFetch = () => {
 
 	const fetchData = async (endpoint) => {
 		setIsLoading(true);
+		setError('');
+
 		let headerObj = null;
 
 		if (user) {

@@ -10,6 +10,7 @@ const useSearch = () => {
 
 	const searchData = async (searchQuery) => {
 		setIsLoading(true);
+		setError('');
 
 		const response = await fetch(
 			`http://localhost:3001/api/users?&query=${searchQuery}`,

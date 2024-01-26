@@ -11,6 +11,8 @@ const useDelete = () => {
 
 	const deleteData = async (endpoint) => {
 		setIsLoading(true);
+		setError('');
+		setMessage('');
 
 		const response = await fetch(`http://localhost:3001/api/${endpoint}`, {
 			method: 'DELETE',

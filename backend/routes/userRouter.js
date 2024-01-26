@@ -44,7 +44,7 @@ router.patch('/users/request/friend/reject', requireToken, rejectFriendRequest);
 router.get('/users/friends', requireToken, getUserFriends);
 
 // wyświetlenie profilu
-router.get('/users/user/:id', requireToken, getUser);
+router.get('/users/user/:username', requireToken, getUser);
 
 // usunięcie znajomego
 router.patch('/users/friends/delete', requireToken, deleteFriend);

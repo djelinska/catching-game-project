@@ -31,7 +31,7 @@ const UsernameDisplay = ({
 				/>
 			</div>
 			{profilePath ? (
-				<Link href={`profile`}>
+				<Link href={`profile/${username}`}>
 					<p>{username}</p>
 				</Link>
 			) : (

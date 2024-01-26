@@ -1,6 +1,4 @@
-const TotalScore = () => {
-	const totalScore = 0;
-
+const TotalScore = ({ totalScore }) => {
 	return (
 		<div className='text-center'>
 			<h2>Total Score</h2>
