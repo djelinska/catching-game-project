@@ -1,49 +1,35 @@
-import { PiMagnifyingGlassFill, PiPlusBold } from 'react-icons/pi';
+'use client';
+
+import { useEffect, useState } from 'react';
 
 import Button from '@/components/common/Button';
-import FormInput from '@/components/form/FormInput';
+import FriendsList from '@/components/friends/FriendsList';
+import InlineError from '@/components/common/InlineError';
 import Link from 'next/link';
-import UsersList from '@/components/friends/UsersList';
+import LoadingMessage from '@/components/common/LoadingMessage';
+import { PiPlusBold } from 'react-icons/pi';
+import { useAuthContext } from '@/contexts/AuthProvider';
+import useFetch from '@/hooks/useFetch';
 
 const Friends = () => {
-	const friendUsers = [
-		{
-			username: 'username1',
-			playCount: 0,
-			totalScore: 0,
-			constTotal: 0,
-			decTotal: 0,
-			randTotal: 0,
-		},
-		{
-			username: 'username2',
-			playCount: 0,
-			totalScore: 0,
-			constTotal: 0,
-			decTotal: 0,
-			randTotal: 0,
-		},
-		{
-			username: 'username23',
-			playCount: 0,
-			totalScore: 0,
-			constTotal: 0,
-			decTotal: 0,
-			randTotal: 0,
-		},
-		{
-			username: 'username4',
-			playCount: 0,
-			totalScore: 0,
-			constTotal: 0,
-			decTotal: 0,
-			randTotal: 0,
-		},
-	];
+	const [friends, setFriends] = useState(null);
+	const { fetchData, isLoading, error } = useFetch();
+	const { user } = useAuthContext();
+
+	const getFriends = async () => {
+		const friends = await fetchData('users/friends');
+		setFriends(friends);
+	};
+
+	useEffect(() => {
+		if (user && !isLoading) {
+			getFriends();
+		}
+	}, []);
 
 	return (
 		<div className='card-container'>
-			<div className='flex justify-between space-x-6'>
+			<div className='flex items-center justify-between space-x-6'>
 				<h2>Friends</h2>
 				<Link href='/friends/add'>
 					<Button
@@ -54,17 +40,13 @@ const Friends = () => {
 					/>
 				</Link>
 			</div>
-			<div className='flex space-x-6'>
-				<FormInput
-					icon={PiMagnifyingGlassFill}
-					placeholder='Search friend'
-					type='text'
-				/>
-				<Button label='Search' color='secondary' size='large' />
-			</div>
-			<div className='max-h-[576px] overflow-y-scroll'>
-				<UsersList users={friendUsers} />
-			</div>
+			{isLoading && <LoadingMessage message='Loading friends...' />}
+			{error && <InlineError error={error} />}
+			{friends && (
+				<div className='max-h-[684px] overflow-y-scroll'>
+					<FriendsList users={friends} />
+				</div>
+			)}
 		</div>
 	);
 };

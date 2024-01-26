@@ -1,4 +1,7 @@
-import { PiPlusBold, PiUserFill, PiUsersFill } from 'react-icons/pi';
+'use client';
+
+import { PiMinusBold, PiPlusBold } from 'react-icons/pi';
+import { useEffect, useState } from 'react';
 
 import Button from '@/components/common/Button';
 import ProfileLeaderboardPosition from '@/components/profile/ProfileLeaderboardPosition';
@@ -7,8 +10,7 @@ import UserStatsLabels from '@/components/common/UserStatsLabels';
 import UsernameDisplay from '@/components/common/UsernameDisplay';
 
 const Profile = ({ params }) => {
-	const username = params.username;
-
+	const userId = params.id;
 	const userGamesStats = {
 		playCount: 0,
 		constSpeedScore: 0,
@@ -18,18 +20,37 @@ const Profile = ({ params }) => {
 		playersChallenged: 0,
 	};
 
-	const joinDate = 'January 2024';
+	const [user, setUser] = useState(null);
+
+	const getMonthName = (monthNumber) => {
+		const months = [
+			'January',
+			'February',
+			'March',
+			'April',
+			'May',
+			'June',
+			'July',
+			'August',
+			'September',
+			'October',
+			'November',
+			'December',
+		];
+
+		return months[monthNumber - 1];
+	};
 
 	return (
 		<div className='card-container'>
 			<h2 className='h-[68px] flex items-center'>Profile</h2>
 			<div className='bg-green-400 p-6 rounded flex flex-col gap-6 items-center'>
-				<UsernameDisplay
-					username={username}
+				{/* <UsernameDisplay
+					username={user.username}
 					iconBackground={true}
 					size='large'
-					date={joinDate}
-				/>
+					date={`${getMonthName(user.month)} ${user.year}`}
+				/> */}
 				<TotalScore />
 				<ProfileLeaderboardPosition />
 				<Button
@@ -39,8 +60,8 @@ const Profile = ({ params }) => {
 					size='small'
 				/>
 				<Button
-					label='Friends'
-					icon={PiUsersFill}
+					label='Delete friend'
+					icon={PiMinusBold}
 					color='secondary'
 					size='small'
 				/>

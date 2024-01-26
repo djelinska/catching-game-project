@@ -1,8 +1,8 @@
-import { useAuth } from '@/contexts/AuthProvider';
+import { useAuthContext } from '@/contexts/AuthProvider';
 import { useRouter } from 'next/navigation';
 
 const useLogout = () => {
-	const { logoutUser } = useAuth();
+	const { logoutUser } = useAuthContext();
 	const router = useRouter();
 
 	const logout = () => {

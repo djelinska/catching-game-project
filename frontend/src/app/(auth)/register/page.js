@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { PiLockSimpleFill } from 'react-icons/pi';
 import { PiUserFill } from 'react-icons/pi';
 import { PiXBold } from 'react-icons/pi';
-import useAuthorize from '@/components/form/useAuthorize';
+import useAuthorize from '@/hooks/useAuthorize';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import userRegisterValidationSchema from '@/validations/userRegisterValidation';
@@ -18,7 +18,7 @@ import userRegisterValidationSchema from '@/validations/userRegisterValidation';
 const Register = () => {
 	const router = useRouter();
 	const { authorize, isLoading } = useAuthorize();
-	const [registerError, setRegisterError] = useState(null);
+	const [error, setError] = useState('');
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useFormik({
 			initialValues: {
@@ -27,28 +27,20 @@ const Register = () => {
 				confirmPassword: '',
 			},
 			validationSchema: userRegisterValidationSchema,
-			onSubmit: async (values, { setErrors, resetForm }) => {
-				setRegisterError(null);
+			onSubmit: async (values, { resetForm }) => {
+				setError('');
 
 				if (!isLoading) {
 					try {
-						await authorize(
-							{
-								...values,
-								username: values.username.toLocaleLowerCase(),
-							},
-							'register'
-						);
+						await authorize('register', {
+							username: values.username.toLocaleLowerCase(),
+							password: values.password,
+						});
 
 						resetForm();
 						router.push('/');
-					} catch (error) {
-						if (error.authErrors) {
-							setErrors(error.authErrors);
-						}
-						if (error.authError) {
-							setRegisterError(error.authError);
-						}
+					} catch (err) {
+						setError(err.message);
 					}
 				}
 			},
@@ -110,7 +102,7 @@ const Register = () => {
 					size='large'
 					additionalStyles='w-full'
 				/>
-				{registerError && <FormError error={registerError} />}
+				{error && <FormError error={error} />}
 			</form>
 			<p className='text-center mb-6'>
 				Already have an account?{' '}

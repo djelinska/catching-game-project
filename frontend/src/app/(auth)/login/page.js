@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { PiLockSimpleFill } from 'react-icons/pi';
 import { PiUserFill } from 'react-icons/pi';
 import { PiXBold } from 'react-icons/pi';
-import useAuthorize from '@/components/form/useAuthorize';
+import useAuthorize from '@/hooks/useAuthorize';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -17,7 +17,7 @@ import userLoginValidationSchema from '@/validations/userLoginValidation';
 const Login = () => {
 	const router = useRouter();
 	const { authorize, isLoading } = useAuthorize();
-	const [loginError, setLoginError] = useState(null);
+	const [error, setError] = useState('');
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useFormik({
 			initialValues: {
@@ -25,28 +25,20 @@ const Login = () => {
 				password: '',
 			},
 			validationSchema: userLoginValidationSchema,
-			onSubmit: async (values, { setErrors, resetForm }) => {
-				setLoginError(null);
+			onSubmit: async (values, { resetForm }) => {
+				setError('');
 
 				if (!isLoading) {
 					try {
-						await authorize(
-							{
-								...values,
-								username: values.username.toLocaleLowerCase(),
-							},
-							'login'
-						);
+						await authorize('login', {
+							username: values.username.toLocaleLowerCase(),
+							password: values.password,
+						});
 
 						resetForm();
 						router.push('/');
-					} catch (error) {
-						if (error.authErrors) {
-							setErrors(error.authErrors);
-						}
-						if (error.authError) {
-							setLoginError(error.authError);
-						}
+					} catch (err) {
+						setError(err.message);
 					}
 				}
 			},
@@ -96,7 +88,7 @@ const Login = () => {
 					size='large'
 					additionalStyles='w-full'
 				/>
-				{loginError && <FormError error={loginError} />}
+				{error && <FormError error={error} />}
 			</form>
 			<p className='text-center mb-6'>
 				Or{' '}

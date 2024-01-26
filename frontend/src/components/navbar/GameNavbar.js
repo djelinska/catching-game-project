@@ -4,12 +4,12 @@ import Button from '../common/Button';
 import CurrentCatQuantity from '../game/CurrentCatQuantity';
 import CurrentCatSpeed from '../game/CurrentCatSpeed';
 import Link from 'next/link';
-import { useAuth } from '@/contexts/AuthProvider';
+import { useAuthContext } from '@/contexts/AuthProvider';
 import { useGameInfo } from '../../contexts/GameProvider';
 
 const GameNavbar = () => {
 	const { state, stepBack } = useGameInfo();
-	const { user } = useAuth();
+	const { user } = useAuthContext();
 
 	return (
 		<div className='w-full h-[68px] absolute top-0 left-0 px-6 flex items-center justify-between space-x-6'>

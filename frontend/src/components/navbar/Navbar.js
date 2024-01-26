@@ -7,14 +7,14 @@ import MenuDropdown from './MenuDropdown';
 import NavbarLinks from './NavbarLinks';
 import { PiPlayFill } from 'react-icons/pi';
 import { PiSquaresFourFill } from 'react-icons/pi';
-import { useAuth } from '@/contexts/AuthProvider';
+import { useAuthContext } from '@/contexts/AuthProvider';
 import { useGameInfo } from '../../contexts/GameProvider';
 import { useState } from 'react';
 
 const Navbar = () => {
 	const [visibleDropdown, setVisibleDropdown] = useState(false);
 	const { state, getNewGame } = useGameInfo();
-	const { user } = useAuth();
+	const { user } = useAuthContext();
 
 	function displayMenuDropdown() {
 		setVisibleDropdown((prevVisibleDropdown) => !prevVisibleDropdown);
@@ -47,6 +47,7 @@ const Navbar = () => {
 							<MenuDropdown visibleDropdown={visibleDropdown} />
 						</div>
 					</div>
+					<p>{user.username}</p>
 				</nav>
 			)}
 		</>
