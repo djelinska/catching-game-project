@@ -34,19 +34,27 @@ const userSchema = new mongoose.Schema(
 		],
 		notifications: [
 			{
-				notification_type: {
+				type: {
 					type: String,
-					enum: ['friend_request', 'challenge_request', 'challenge_result'],
+					enum: ['friendRequest', 'challengeRequest', 'challengeResult'],
 					required: true,
 				},
-				user_id: {
+				sender_id: {
 					type: mongoose.Schema.Types.ObjectId,
 					ref: 'User',
-				},
-				username: {
-					type: String,
 					required: true,
 				},
+				sender_username: { type: String, required: true },
+				challenge: {
+					id: {
+						type: mongoose.Schema.Types.ObjectId,
+						ref: 'Challenge',
+					},
+					speed: { type: String, enum: ['const', 'dec', 'rand'] },
+					quantity: { type: Number },
+					result: { type: String, enum: ['win', 'lost', 'draw'] },
+				},
+				created_at: { type: Date, default: Date.now },
 			},
 		],
 		stats: {

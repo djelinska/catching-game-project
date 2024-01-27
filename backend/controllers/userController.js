@@ -206,9 +206,9 @@ const sendFriendRequest = async (req, res) => {
 		});
 
 		const newNotification = {
-			notification_type: 'friend_request',
-			user_id: loggedUserId,
-			username: loggedUser.username,
+			type: 'friendRequest',
+			sender_id: loggedUserId,
+			sender_username: loggedUser.username,
 		};
 
 		await User.findByIdAndUpdate(userId, {
@@ -358,6 +358,28 @@ const getUserNotifications = async (req, res) => {
 	}
 };
 
+const getUserTotalScore = async (req, res) => {
+	try {
+		const totalScore = await User.aggregate([
+			{
+				$match: {
+					_id: req.user._id,
+				},
+			},
+			{
+				$project: {
+					total_score: '$stats.total_score',
+				},
+			},
+		]);
+
+		res.status(200).json(totalScore);
+	} catch (error) {
+		console.log(error.message);
+		res.status(500).json({ error: 'Something went wrong' });
+	}
+};
+
 const saveGameScore = async (req, res) => {
 	try {
 		const { score, gameType } = req.body;
@@ -406,7 +428,7 @@ const getLeaderBoard = async (req, res) => {
 				},
 			},
 			{
-				$sort: { 'stats.total_score': -1 },
+				$sort: { 'stats.total_score': -1, username: 1 },
 			},
 		]);
 
@@ -431,6 +453,7 @@ module.exports = {
 	sendFriendRequest,
 	acceptFriendRequest,
 	rejectFriendRequest,
+	getUserTotalScore,
 	saveGameScore,
 	getLeaderBoard,
 };

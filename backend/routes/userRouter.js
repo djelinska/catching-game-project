@@ -12,6 +12,7 @@ const {
 	sendFriendRequest,
 	acceptFriendRequest,
 	rejectFriendRequest,
+	getUserTotalScore,
 	saveGameScore,
 	getLeaderBoard,
 	deleteFriend,
@@ -20,42 +21,34 @@ const { requireToken } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.post('/users/register', registerUser);
-router.post('/users/login', loginUser);
+router.post('/register', registerUser);
+router.post('/login', loginUser);
 
-// działania na koncie użytkownika
-router.get('/users/user', requireToken, getUserAccount);
-router.patch('/users/user', requireToken, editUserAccount);
-router.delete('/users/user', requireToken, deleteUserAccount);
+// konto użytkownika
+router.get('/account', requireToken, getUserAccount);
+router.patch('/account', requireToken, editUserAccount);
+router.delete('/account', requireToken, deleteUserAccount);
 
-// wyświetlenie listy użytkowników możliwych do dodania do znajomych
-router.get('/users', requireToken, searchUsers);
+router.get('/search', requireToken, searchUsers);
 
-// wysłanie zaproszenia do znajomych
-router.patch('/users/request/friend/send', requireToken, sendFriendRequest);
-
-// akceptacja zaproszenia do znajomych
-router.patch('/users/request/friend/accept', requireToken, acceptFriendRequest);
-
-// odrzucenie zaproszenia do znajomych
-router.patch('/users/request/friend/reject', requireToken, rejectFriendRequest);
-
-// wyświetlenie listy znajomych
-router.get('/users/friends', requireToken, getUserFriends);
-
-// wyświetlenie profilu
-router.get('/users/user/:username', requireToken, getUser);
-
-// usunięcie znajomego
+// obsługa znajomych
+router.get('/friends', requireToken, getUserFriends);
+router.patch('/friends/request/send', requireToken, sendFriendRequest);
+router.patch('/friends/request/accept', requireToken, acceptFriendRequest);
+router.patch('/friends/request/reject', requireToken, rejectFriendRequest);
 router.patch('/users/friends/delete', requireToken, deleteFriend);
 
-// wyświetlenie powiadomien
-router.get('/users/notifications', requireToken, getUserNotifications);
+// profil użytkownika
+router.get('/profile/:username', requireToken, getUser);
 
-// aktualizacja statyk i zapisanie wyniku
+// powiadomienia
+router.get('/notifications', requireToken, getUserNotifications);
+
+// aktualizacje wyników
+router.get('/game/totalscore', requireToken, getUserTotalScore);
 router.patch('/game/update', requireToken, saveGameScore);
 
-// wyświetlenie tablicy wyników
+// tablica wyników
 router.get('/game/leaderboard', requireToken, getLeaderBoard);
 
 module.exports = router;
