@@ -27,6 +27,27 @@ app.use('/api/messages', messageRouter);
 app.use('/api/comments', commentRouter);
 app.use('/api/challenges', challengeRouter);
 
+app.get('/sse', (req, res) => {
+	res.setHeader('Content-Type', 'text/event-stream');
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Cache-Control', 'no-cache');
+	res.setHeader('Connection', 'keep-alive');
+
+	const sendData = (data) => {
+		res.write(`data: ${JSON.stringify(data)}\n\n`);
+	};
+
+	const intervalId = setInterval(() => {
+		const randomNumber = Math.floor(Math.random() * 10);
+		sendData({ number: randomNumber });
+	}, 5000);
+
+	req.on('close', () => {
+		clearInterval(intervalId);
+		res.end();
+	});
+});
+
 mongoose
 	.connect(process.env.MONGO_URI)
 	.then(() => {
