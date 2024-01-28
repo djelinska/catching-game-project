@@ -22,7 +22,6 @@ const Chat = () => {
 	const { updateData } = useUpdate();
 	const { deleteData } = useDelete();
 
-	const startedChatsUsernames = ['friend1', 'friend2'];
 	const [messages, setMesages] = useState(null);
 	const { user } = useAuthContext();
 	const [updatedMessageId, setUpdatedMessageId] = useState(null);
@@ -41,7 +40,6 @@ const Chat = () => {
 		}
 
 		if (messageInput !== '' && updatedMessageId) {
-			console.log('Aktualizuj', messageInput, updatedMessageId);
 			await updateData('messages', {
 				messageId: updatedMessageId,
 				newContent: messageInput,
@@ -109,6 +107,7 @@ const Chat = () => {
 					<MessageInput
 						name='message'
 						value={messageInput}
+						type='comment'
 						onChangeAction={(e) => setMessageInput(e.target.value)}
 					/>
 					<Button

@@ -4,8 +4,9 @@ const User = require('../models/userModel');
 
 const addComment = async (req, res) => {
 	try {
-		const { profileUserId, content } = req.body;
-		const user = await User.findById(profileUserId);
+		const { profileUsername, content } = req.body;
+		const user = await User.findOne({ username: profileUsername });
+		const loggedUser = await User.findById(req.user._id);
 
 		if (!user) {
 			return res.status(404).json({ error: 'User not found' });
@@ -18,7 +19,8 @@ const addComment = async (req, res) => {
 		const commentData = {
 			content,
 			author: req.user._id,
-			profile_user: new mongoose.Types.ObjectId(profileUserId),
+			author_username: loggedUser.username,
+			profile_user: new mongoose.Types.ObjectId(user._id),
 		};
 
 		const comment = await Comment.create(commentData);
@@ -36,14 +38,14 @@ const addComment = async (req, res) => {
 
 const getComments = async (req, res) => {
 	try {
-		const profileUserId = req.params.id;
-		const user = await User.findById(profileUserId);
+		const profileUsername = req.params.username;
+		const user = await User.findOne({ username: profileUsername });
 
 		if (!user) {
 			return res.status(404).json({ error: 'User not found' });
 		}
 
-		const comments = await Comment.find({ profile_user: profileUserId });
+		const comments = await Comment.find({ profile_user: user._id });
 
 		res.status(200).json(comments);
 	} catch (error) {

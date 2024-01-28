@@ -1,8 +1,8 @@
-const MessageInput = ({ name, value, onChangeAction }) => {
+const MessageInput = ({ name, value, type, onChangeAction }) => {
 	return (
 		<textarea
 			rows='1'
-			placeholder='Write message'
+			placeholder={type === 'message' ? 'Write message' : 'Write comment'}
 			name={name}
 			value={value}
 			onChange={onChangeAction}

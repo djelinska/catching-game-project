@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 
 router.post('/', requireToken, addComment);
-router.get('/:id', requireToken, getComments);
+router.get('/:username', requireToken, getComments);
 router.patch('/', requireToken, editComment);
 router.delete('/:id', requireToken, deleteComment);
 
