@@ -1,5 +1,5 @@
 import { PiCatFill } from 'react-icons/pi';
-import { useGameInfo } from '../../contexts/GameProvider';
+import { useGameInfo } from '../../context/GameProvider';
 
 const CurrentCatQuantity = () => {
 	const { state } = useGameInfo();

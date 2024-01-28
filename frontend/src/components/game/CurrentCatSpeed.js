@@ -1,7 +1,7 @@
 import { PiArrowsHorizontalFill } from 'react-icons/pi';
 import { PiShuffleSimpleFill } from 'react-icons/pi';
 import { PiTrendDownFill } from 'react-icons/pi';
-import { useGameInfo } from '../../contexts/GameProvider';
+import { useGameInfo } from '../../context/GameProvider';
 
 const CurrentCatSpeed = () => {
 	const { state } = useGameInfo();

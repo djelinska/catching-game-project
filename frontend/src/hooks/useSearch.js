@@ -1,6 +1,4 @@
-'use client';
-
-import { useAuthContext } from '@/contexts/AuthProvider';
+import { useAuthContext } from '../context/AuthProviver';
 import { useState } from 'react';
 
 const useSearch = () => {
@@ -13,7 +11,7 @@ const useSearch = () => {
 		setError('');
 
 		const response = await fetch(
-			`http://localhost:3001/api/users?&query=${searchQuery}`,
+			`http://localhost:3001/api/users/search?&query=${searchQuery}`,
 			{
 				headers: {
 					Authorization: `Bearer ${user.token}`,

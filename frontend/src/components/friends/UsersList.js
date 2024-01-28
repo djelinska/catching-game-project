@@ -1,4 +1,4 @@
-import UserCard from '@/components/friends/UserCard';
+import UserCard from './UserCard';
 
 const UsersList = ({ users }) => {
 	return (

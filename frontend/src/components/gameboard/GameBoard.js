@@ -1,10 +1,11 @@
-'use client';
-
 import { useEffect, useState } from 'react';
+import { useLocation, useResolvedPath } from 'react-router-dom';
 
 import CatTile from './CatTile';
 import Tile from './Tile';
-import { useGameInfo } from '../../contexts/GameProvider';
+import { useGameInfo } from '../../context/GameProvider';
+import usePost from '../../hooks/usePost';
+import useUpdate from '../../hooks/useUpdate';
 
 const GameBoard = () => {
 	const { state, setCurrentIteration, setHearts, gameEnd, checkWin } =
@@ -13,8 +14,61 @@ const GameBoard = () => {
 	const [decSpeedCurrentDuration, setDecSpeedCurrentDuration] = useState(5000);
 	const [decSpeedDurationStep, setDecSpeedDurationStep] = useState(null);
 	const TILES_NUMBER = 64;
+	const location = useLocation();
+	const searchParams = new URLSearchParams(location.search);
+	const userId = searchParams.get('userId');
+	const { postData, isLoading: postLoading } = usePost();
+	const { updateData, isLoading: updateLoading } = useUpdate();
+	const [challengeAdded, setChallengeAdded] = useState(false);
+	const [challengeChecked, setChallengeChecked] = useState(false);
+	const [scoreRecorded, setScoreRecorded] = useState(false);
+
+	const addChallenge = async (win) => {
+		if (win && challengeAdded && !postLoading) {
+			await postData('challenges', {
+				opponentId: userId,
+				speed: state.gameOptions.speed,
+				quantity: state.gameOptions.quantity,
+				senderScore: state.collectedCats,
+			});
+
+			setChallengeAdded(false);
+		}
+	};
+
+	const recordGameScore = async (win) => {
+		if (scoreRecorded && !updateLoading) {
+			const score = win ? state.collectedCats : 0;
+
+			await updateData('users/game/update', {
+				score: score,
+				gameType: `${state.gameOptions.speed}_speed_total_score`,
+			});
+
+			setScoreRecorded(false);
+		}
+	};
+
+	const checkChallengeResult = async () => {
+		const searchParams = new URLSearchParams(location.search);
+		const notificationId = searchParams.get('notificationId');
+		const challengeId = searchParams.get('challengeId');
+
+		if (challengeChecked && !updateLoading) {
+			await updateData('challenges/request/accept', {
+				notificationId: notificationId,
+				challengeId: challengeId,
+				score: state.collectedCats,
+			});
+
+			setChallengeChecked(false);
+		}
+	};
 
 	useEffect(() => {
+		setChallengeAdded(true);
+		setChallengeChecked(true);
+		setScoreRecorded(true);
 		if (state.isGameStarted) {
 			if (state.gameOptions.speed === 'dec') {
 				setDecSpeedDurationStep(
@@ -49,6 +103,14 @@ const GameBoard = () => {
 				gameEnd();
 				setDecSpeedCurrentDuration(5000);
 				setDecSpeedDurationStep(null);
+
+				if (location.pathname === '/game/accept/challenge') {
+					checkChallengeResult();
+				} else if (location.pathname === '/game/challenge') {
+					addChallenge(win);
+				} else {
+					recordGameScore(win);
+				}
 			} else {
 				makeGameIteration(
 					state.currentIteration,
@@ -92,12 +154,7 @@ const GameBoard = () => {
 	}
 
 	return (
-		<div className='aspect-1 grid grid-cols-8 grid-rows-8 gap-2 mr-6 relative'>
-			{false && (
-				<div className='bg-green-500 opacity-75 absolute top-0 w-full h-full rounded-sm flex justify-center items-center'>
-					<p className='text-xl'>{countdown}</p>
-				</div>
-			)}
+		<div className='w-full aspect-square grid grid-cols-8 grid-rows-8 gap-2 mr-6 relative'>
 			{[...Array(TILES_NUMBER)].map((tile, index) =>
 				index === catTilePosition ? (
 					<CatTile key={index} />

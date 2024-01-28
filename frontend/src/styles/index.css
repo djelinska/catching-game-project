@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		font-family: 'Poppins', system-ui, sans-serif;
+	}
+
+	body {
+		background-image: url('/public/paw-background.png');
+		background-position: center;
+	}
+
+	body {
+		@apply bg-green-500 uppercase font-semibold text-base text-white;
+	}
+}
+
+::-webkit-scrollbar {
+	@apply w-3;
+}
+
+::-webkit-scrollbar-track {
+	@apply bg-green-400 rounded-sm;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-green-300 rounded-sm shadow-card;
+}
+
+button,
+input,
+textarea {
+	@apply outline-none;
+}
+
+svg {
+	@apply text-white text-lg;
+}
+
+h2 {
+	@apply text-lg;
+}
+
+h3 {
+	@apply text-xs;
+}
+
+.menu-dropdown {
+	@apply bg-green-400 flex flex-col space-y-6 p-6 rounded text-nowrap shadow-card;
+}
+
+.card-container-fit {
+	@apply bg-green-500 flex flex-col gap-6 p-6 rounded shadow-card;
+}
+
+.card-container {
+	@apply bg-green-500 flex flex-col gap-6 p-6 rounded shadow-card w-full max-w-screen-xl;
+}
+
+.game-side-container {
+	@apply w-full relative mt-6 px-6 pb-6 pt-[136px] flex flex-col gap-6 items-center;
+}
+
+.game-top-navbar {
+	@apply w-full h-[68px] absolute top-0 left-0 px-6 flex items-center justify-between gap-6;
+}
+
+.game-stats-label {
+	@apply flex items-center justify-center text-center;
+}
+
+.leaderboard-grid {
+	display: grid;
+	grid-template-columns: 96px 240px repeat(5, 1fr);
+	gap: 0.5rem;
+}

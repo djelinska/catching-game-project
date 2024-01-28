@@ -36,7 +36,7 @@ router.get('/friends', requireToken, getUserFriends);
 router.patch('/friends/request/send', requireToken, sendFriendRequest);
 router.patch('/friends/request/accept', requireToken, acceptFriendRequest);
 router.patch('/friends/request/reject', requireToken, rejectFriendRequest);
-router.patch('/users/friends/delete', requireToken, deleteFriend);
+router.patch('/friends/delete', requireToken, deleteFriend);
 
 // profil użytkownika
 router.get('/profile/:username', requireToken, getUser);

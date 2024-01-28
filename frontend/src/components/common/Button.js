@@ -1,10 +1,10 @@
 const Button = ({
-	typeSubmit,
 	label,
 	icon: IconComponent,
 	color,
 	size,
 	additionalStyles,
+	isTypeSubmit,
 	onClickAction,
 }) => {
 	const colors = {
@@ -30,10 +30,10 @@ const Button = ({
 		<div>
 			<button
 				className={`shadow bg-${color} ${style}`}
-				type={typeSubmit ? 'submit' : 'button'}
+				type={isTypeSubmit ? 'submit' : 'button'}
 				onClick={onClickAction}
 			>
-				<div className='flex items-center justify-center space-x-4 min-h-9'>
+				<div className='flex items-center justify-center gap-4 min-h-9'>
 					{IconComponent && <IconComponent />}
 					{label && (
 						<p

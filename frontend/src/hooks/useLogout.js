@@ -1,14 +1,14 @@
-import { useAuthContext } from '@/contexts/AuthProvider';
-import { useRouter } from 'next/navigation';
+import { useAuthContext } from '../context/AuthProviver';
+import { useNavigate } from 'react-router-dom';
 
 const useLogout = () => {
 	const { logoutUser } = useAuthContext();
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	const logout = () => {
 		localStorage.removeItem('user');
 		logoutUser();
-		router.push('/');
+		navigate('/');
 	};
 
 	return { logout };

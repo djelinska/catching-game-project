@@ -3,19 +3,19 @@
 import Button from '../common/Button';
 import { PiPlusBold } from 'react-icons/pi';
 import UsernameDisplay from '../common/UsernameDisplay';
-import { useAuthContext } from '@/contexts/AuthProvider';
-import { useRouter } from 'next/navigation';
-import useUpdate from '@/hooks/useUpdate';
+import { useAuthContext } from '../../context/AuthProviver';
+import { useNavigate } from 'react-router-dom';
+import useUpdate from '../../hooks/useUpdate';
 
 const UserCard = ({ userObject }) => {
 	const { updateData, isLoading, message, error } = useUpdate();
 	const { user } = useAuthContext();
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	const handleSendFriendRequest = async (userId) => {
 		if (user && !isLoading) {
-			await updateData('users/request/friend/send', { userId: userId });
-			router.push('/friends');
+			await updateData('users/friends/request/send', { userId: userId });
+			navigate('/friends');
 		}
 	};
 
@@ -33,6 +33,7 @@ const UserCard = ({ userObject }) => {
 					icon={PiPlusBold}
 					color='secondary'
 					size='small'
+					additionalStyles='w-full'
 					onClickAction={() => handleSendFriendRequest(userObject._id)}
 				/>
 			</div>

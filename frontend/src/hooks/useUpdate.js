@@ -1,6 +1,4 @@
-'use client';
-
-import { useAuthContext } from '@/contexts/AuthProvider';
+import { useAuthContext } from '../context/AuthProviver';
 import { useState } from 'react';
 
 const useUpdate = () => {

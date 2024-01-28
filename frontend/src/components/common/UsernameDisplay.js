@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { PiUserFill } from 'react-icons/pi';
 
 const UsernameDisplay = ({
@@ -31,7 +31,7 @@ const UsernameDisplay = ({
 				/>
 			</div>
 			{profilePath ? (
-				<Link href={`profile/${username}`}>
+				<Link to={`/profile/${username}`}>
 					<p>{username}</p>
 				</Link>
 			) : (
