@@ -50,7 +50,9 @@ const FriendCard = ({ userObject, afterDelete }) => {
 							size='small'
 						/>
 					</Link>
-					<Button icon={PiChatCenteredFill} color='secondary' size='small' />
+					<Link to={`/chat?userId=${userObject.user_id}`}>
+						<Button icon={PiChatCenteredFill} color='secondary' size='small' />
+					</Link>
 				</div>
 			)}
 			{userObject.status === 'pending' && (

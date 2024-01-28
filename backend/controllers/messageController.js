@@ -6,6 +6,7 @@ const addMessage = async (req, res) => {
 	try {
 		const { content, receiverId } = req.body;
 		const user = await User.findById(receiverId);
+		const loggedUser = await User.findById(req.user._id);
 
 		if (!content) {
 			return res.status(400).json({ error: 'Message is required' });
@@ -22,7 +23,9 @@ const addMessage = async (req, res) => {
 				new mongoose.Types.ObjectId(receiverId),
 			],
 			sender: new mongoose.Types.ObjectId(req.user._id),
+			sender_username: loggedUser.username,
 			receiver: new mongoose.Types.ObjectId(receiverId),
+			receiver_username: user.username,
 		};
 
 		const message = await Message.create(messageData);
@@ -69,12 +72,6 @@ const editMessage = async (req, res) => {
 		return res.status(404).json({ error: 'Message not found' });
 	}
 
-	if (existingMessage.sender.toString() !== req.user._id.toString()) {
-		return res
-			.status(403)
-			.json({ error: 'You do not have permission to edit this message' });
-	}
-
 	existingMessage.content = newContent;
 	existingMessage.edited = true;
 	existingMessage.updated_at = Date.now();
@@ -95,12 +92,6 @@ const deleteMessage = async (req, res) => {
 		const existingMessage = await Message.findById(messageId);
 		if (!existingMessage) {
 			return res.status(404).json({ error: 'Message not found' });
-		}
-
-		if (existingMessage.sender.toString() !== req.user._id.toString()) {
-			return res
-				.status(403)
-				.json({ error: 'You do not have permission to delete this message' });
 		}
 
 		await Message.deleteOne({ _id: messageId });

@@ -4,6 +4,7 @@ const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const mqtt = require('mqtt');
 
 const userRouter = require('./routes/userRouter');
 const messageRouter = require('./routes/messageRouter');
@@ -13,6 +14,8 @@ const challengeRouter = require('./routes/challengeRouter');
 const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 3001;
+
+const mqttClient = mqtt.connect('mqtt://mqtt.eclipseprojects.io');
 
 app.use(cors());
 app.use(express.json());
@@ -30,3 +33,7 @@ mongoose
 		});
 	})
 	.catch((error) => console.log(error));
+
+mqttClient.on('connect', () => {
+	console.log('Połączono');
+});

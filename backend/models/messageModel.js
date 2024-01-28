@@ -10,9 +10,17 @@ const messageSchema = new mongoose.Schema({
 		ref: 'User',
 		required: true,
 	},
+	sender_username: {
+		type: String,
+		required: true,
+	},
 	receiver: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
+		required: true,
+	},
+	receiver_username: {
+		type: String,
 		required: true,
 	},
 	edited: {

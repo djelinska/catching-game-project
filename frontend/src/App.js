@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import AddFriend from './pages/AddFriend';
+import Chat from './pages/Chat';
 import EditProfile from './pages/EditProfile';
 import Friends from './pages/Friends';
 import Game from './pages/Game';
@@ -44,6 +45,7 @@ function App() {
 					<Route path='/leaderboard' element={<LeaderBoard />} />
 					<Route path='/profile/:username' element={<UserProfile />} />
 					<Route path='/edit' element={<EditProfile />} />
+					<Route path='/chat' element={<Chat />} />
 				</Routes>
 			</div>
 		</Router>
