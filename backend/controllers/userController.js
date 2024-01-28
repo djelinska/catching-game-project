@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const { createToken } = require('../middleware/authMiddleware');
 const { default: mongoose } = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 const registerUser = async (req, res) => {
 	try {
@@ -20,6 +21,12 @@ const registerUser = async (req, res) => {
 			password: hashedPassword,
 		});
 		const token = createToken(user._id);
+
+		res.cookie(
+			'user',
+			JSON.stringify({ username, isAdmin: user.is_admin, token }),
+			{ httpOnly: true }
+		);
 
 		res.status(201).json({ username, isAdmin: user.is_admin, token });
 	} catch (error) {
@@ -44,6 +51,12 @@ const loginUser = async (req, res) => {
 		}
 
 		const token = createToken(user._id);
+
+		res.cookie(
+			'user',
+			JSON.stringify({ username, isAdmin: user.is_admin, token }),
+			{ httpOnly: true }
+		);
 
 		res.status(200).json({ username, isAdmin: user.is_admin, token });
 	} catch (error) {

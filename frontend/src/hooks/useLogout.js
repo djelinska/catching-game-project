@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { useAuthContext } from '../context/AuthProviver';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,7 +7,7 @@ const useLogout = () => {
 	const navigate = useNavigate();
 
 	const logout = () => {
-		localStorage.removeItem('user');
+		Cookies.remove('user');
 		logoutUser();
 		navigate('/');
 	};

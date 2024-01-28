@@ -67,7 +67,7 @@ const UserProfile = () => {
 	}, [updatedCommentId]);
 
 	useEffect(() => {
-		if (user && !isLoading) {
+		if (user) {
 			getUserProfile();
 			getComments();
 		}
@@ -127,20 +127,29 @@ const UserProfile = () => {
 							<div className='flex flex-col gap-4'>
 								{comments.map((comment) => (
 									<div key={comment._id} className='p-4 bg-green-400 rounded'>
-										{comment.author_username === user.username && (
-											<div className='flex gap-4 mb-2'>
-												<button
-													onClick={() => setUpdatedCommentId(comment._id)}
-												>
-													<PiPenFill />
-												</button>
-												<button
-													onClick={() => handleDeleteComment(comment._id)}
-												>
-													<PiTrashFill />
-												</button>
-											</div>
-										)}
+										<div className='flex gap-4 mb-2'>
+											<UsernameDisplay
+												username={comment.author_username}
+												iconBackground={true}
+												size='small'
+												reversed={false}
+												profilePath={false}
+											/>
+											{comment.author_username === user.username && (
+												<>
+													<button
+														onClick={() => setUpdatedCommentId(comment._id)}
+													>
+														<PiPenFill />
+													</button>
+													<button
+														onClick={() => handleDeleteComment(comment._id)}
+													>
+														<PiTrashFill />
+													</button>
+												</>
+											)}
+										</div>
 										<p>{comment.content}</p>
 									</div>
 								))}

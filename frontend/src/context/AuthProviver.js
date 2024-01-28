@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
+import Cookies from 'js-cookie';
+
 const AuthContext = createContext();
 export const useAuthContext = () => useContext(AuthContext);
 
@@ -22,9 +24,10 @@ const AuthProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		const user = JSON.parse(localStorage.getItem('user'));
+		const userCookie = Cookies.get('user');
 
-		if (user) {
+		if (userCookie) {
+			const user = JSON.parse(userCookie);
 			loginUser(user);
 		}
 	}, []);
@@ -37,6 +40,7 @@ const AuthProvider = ({ children }) => {
 	}
 
 	function logoutUser() {
+		Cookies.remove('user');
 		dispatch({ type: 'LOGOUT_USER' });
 	}
 
