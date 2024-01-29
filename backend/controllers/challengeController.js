@@ -103,12 +103,6 @@ const acceptChallengeRequest = async (req, res) => {
 				? 'lost'
 				: 'draw';
 
-		if (result === 'win') {
-			await User.findByIdAndUpdate(loggedUser._id, {
-				$inc: {},
-			});
-		}
-
 		const loggedUserNotification = {
 			type: 'challengeResult',
 			sender_id: challengeUser._id,
@@ -149,15 +143,17 @@ const acceptChallengeRequest = async (req, res) => {
 		if (result === 'win') {
 			await User.findByIdAndUpdate(loggedUser._id, {
 				$inc: {
-					'stats.total_score': 2 * score,
-					[`stats.${challenge.speed}_speed_total_score`]: 2 * score,
+					'stats.total_score': 2 * challenge.quantity,
+					[`stats.${challenge.speed}_speed_total_score`]:
+						2 * challenge.quantity,
 				},
 			});
 		} else if (result === 'lost') {
 			await User.findByIdAndUpdate(challengeUser._id, {
 				$inc: {
-					'stats.total_score': 2 * score,
-					[`stats.${challenge.speed}_speed_total_score`]: 2 * score,
+					'stats.total_score': 2 * challenge.quantity,
+					[`stats.${challenge.speed}_speed_total_score`]:
+						2 * challenge.quantity,
 				},
 			});
 		}

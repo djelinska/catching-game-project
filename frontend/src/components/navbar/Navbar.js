@@ -6,12 +6,15 @@ import {
 	PiUserFill,
 	PiUsersFill,
 } from 'react-icons/pi';
+import { useEffect, useState } from 'react';
 
 import Button from '../common/Button';
 import IconButton from '../common/IconButton';
 import Logo from '../common/Logo';
 import Menu from './Menu';
+import mqtt from 'mqtt';
 import { useAuthContext } from '../../context/AuthProviver';
+import { useMQTTContext } from '../../context/MQTTProvider';
 
 const Navbar = () => {
 	const { user } = useAuthContext();
@@ -19,13 +22,14 @@ const Navbar = () => {
 		{ icon: PiUsersFill, path: '/friends' },
 		{ icon: PiTrophyFill, path: '/leaderboard' },
 		{ icon: PiBellSimpleFill, path: '/notifications' },
-		{ icon: PiChatCenteredFill, path: '/chat' },
 	];
 	const location = useLocation();
+	const { currentTime } = useMQTTContext();
 
 	return (
 		<nav className='absolute top-0 p-6 w-full h-28 flex items-center gap-6 bg-green-500 shadow-card'>
 			<Logo />
+			<div className='text-lg'>{currentTime}</div>
 			{!user ? (
 				<>
 					<Link to='/register'>

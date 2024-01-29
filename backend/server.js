@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const mqtt = require('mqtt');
 const cookieParser = require('cookie-parser');
+const User = require('./models/userModel');
+const { Server } = require('socket.io');
 
 const userRouter = require('./routes/userRouter');
 const messageRouter = require('./routes/messageRouter');
@@ -15,6 +17,12 @@ const challengeRouter = require('./routes/challengeRouter');
 const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 3001;
+const io = new Server(server, {
+	cors: {
+		origin: 'http://localhost:3000',
+		methods: ['GET', 'POST'],
+	},
+});
 
 const mqttClient = mqtt.connect('mqtt://mqtt.eclipseprojects.io');
 
@@ -58,5 +66,28 @@ mongoose
 	.catch((error) => console.log(error));
 
 mqttClient.on('connect', () => {
-	console.log('Połączono');
+	console.log('MQTT client connected');
+	const intervalId = setInterval(() => {
+		const currentTime = new Date().toLocaleTimeString();
+		mqttClient.publish('time', currentTime);
+	}, 1000);
+
+	mqttClient.on('close', () => {
+		clearInterval(intervalId);
+		console.log('MQTT client dIsonnected');
+	});
+});
+
+io.on('connection', (socket) => {
+	console.log('Websocket client connected');
+
+	socket.on('getTotalScore', async (username) => {
+		const user = await User.findOne({ username });
+		const totalScore = user.stats.total_score;
+		socket.emit('totalScore', totalScore);
+	});
+
+	socket.on('disconnect', () => {
+		console.log('Websocket client disconnected');
+	});
 });

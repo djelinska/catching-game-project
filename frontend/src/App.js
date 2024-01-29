@@ -37,15 +37,39 @@ function App() {
 						element={!user ? <LoginPage /> : <Navigate to='/' />}
 					/>
 					<Route path='/game/' element={<Game />} />
-					<Route path='/game/challenge' element={<Game />} />
-					<Route path='/game/accept/challenge' element={<Game />} />
-					<Route path='/friends' element={<Friends />} />
-					<Route path='/friends/add' element={<AddFriend />} />
-					<Route path='/notifications' element={<Notifications />} />
-					<Route path='/leaderboard' element={<LeaderBoard />} />
-					<Route path='/profile/:username' element={<UserProfile />} />
-					<Route path='/edit' element={<EditProfile />} />
-					<Route path='/chat' element={<Chat />} />
+					<Route
+						path='/game/challenge'
+						element={user ? <Game /> : <Navigate to='/' />}
+					/>
+					<Route
+						path='/game/accept/challenge'
+						element={user ? <Game /> : <Navigate to='/' />}
+					/>
+					<Route
+						path='/friends'
+						element={user ? <Friends /> : <Navigate to='/' />}
+					/>
+					<Route
+						path='/friends/add'
+						element={user ? <AddFriend /> : <Navigate to='/' />}
+					/>
+					<Route
+						path='/notifications'
+						element={user ? <Notifications /> : <Navigate to='/' />}
+					/>
+					<Route
+						path='/leaderboard'
+						element={user ? <LeaderBoard /> : <Navigate to='/' />}
+					/>
+					<Route
+						path='/profile/:username'
+						element={user ? <UserProfile /> : <Navigate to='/' />}
+					/>
+					<Route
+						path='/edit'
+						element={user ? <EditProfile /> : <Navigate to='/' />}
+					/>
+					<Route path='/chat' element={user ? <Chat /> : <Navigate to='/' />} />
 				</Routes>
 			</div>
 		</Router>

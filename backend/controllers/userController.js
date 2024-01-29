@@ -2,7 +2,6 @@ const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const { createToken } = require('../middleware/authMiddleware');
 const { default: mongoose } = require('mongoose');
-const cookieParser = require('cookie-parser');
 
 const registerUser = async (req, res) => {
 	try {

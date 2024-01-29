@@ -2,9 +2,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Button from '../components/common/Button';
+import Cookies from 'js-cookie';
 import { PiPlayFill } from 'react-icons/pi';
 import TotalScore from '../components/game/TotalScore';
+import { useAuthContext } from '../context/AuthProviver';
 import { useGameInfo } from '../context/GameProvider';
+import { useMQTTContext } from '../context/MQTTProvider';
 
 const Home = () => {
 	const { state, resetState, getNewGame } = useGameInfo();

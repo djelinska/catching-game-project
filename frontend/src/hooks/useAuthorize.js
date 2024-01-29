@@ -24,7 +24,6 @@ const useAuthorize = () => {
 			throw new Error(responseBody.error);
 		} else {
 			setIsLoading(false);
-			localStorage.setItem('user', JSON.stringify(responseBody));
 			loginUser(responseBody);
 		}
 	};
