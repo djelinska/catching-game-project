@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const { createToken } = require('../middleware/authMiddleware');
 const { default: mongoose } = require('mongoose');
+const logger = require('../logger');
 
 const registerUser = async (req, res) => {
 	try {
@@ -26,6 +27,10 @@ const registerUser = async (req, res) => {
 			JSON.stringify({ username, isAdmin: user.is_admin, token }),
 			{ httpOnly: true }
 		);
+
+		logger.info('Rejestracja użytkownika w seriwsie', {
+			additionalInfo: username,
+		});
 
 		res.status(201).json({ username, isAdmin: user.is_admin, token });
 	} catch (error) {
@@ -56,6 +61,10 @@ const loginUser = async (req, res) => {
 			JSON.stringify({ username, isAdmin: user.is_admin, token }),
 			{ httpOnly: true }
 		);
+
+		logger.info('Zalogowanie użytkownika w seriwsie', {
+			additionalInfo: username,
+		});
 
 		res.status(200).json({ username, isAdmin: user.is_admin, token });
 	} catch (error) {
@@ -106,8 +115,12 @@ const editUserAccount = async (req, res) => {
 			updateFields.password = hashedPassword;
 		}
 
-		await User.findByIdAndUpdate(req.user._id, {
+		const updatedUser = await User.findByIdAndUpdate(req.user._id, {
 			$set: updateFields,
+		});
+
+		logger.info('Edycja konta użytkownika', {
+			additionalInfo: user.username,
 		});
 
 		res.status(200).json({ message: 'The password has been changed' });
@@ -140,6 +153,10 @@ const deleteUserAccount = async (req, res) => {
 		);
 
 		await User.findByIdAndDelete(req.user._id);
+
+		logger.info('Usunięto konto użytkownika', {
+			additionalInfo: user.username,
+		});
 
 		res.status(200).json({ message: 'The account has been deleted' });
 	} catch (error) {
@@ -227,6 +244,10 @@ const sendFriendRequest = async (req, res) => {
 			$push: { notifications: newNotification },
 		});
 
+		logger.info(`Wysłano zaproszenie do znajomych do ${user.username}`, {
+			additionalInfo: loggedUser.username,
+		});
+
 		res.status(200).json({ message: 'Friend request sent' });
 	} catch (error) {
 		console.log(error.message);
@@ -273,6 +294,10 @@ const acceptFriendRequest = async (req, res) => {
 			$pull: { notifications: { _id: notificationId } },
 		});
 
+		logger.info(`Zaakceptowano zaproszenie do znajomych od ${user.username}`, {
+			additionalInfo: loggedUser.username,
+		});
+
 		res.status(200).json({ message: 'Friend request accepted' });
 	} catch (error) {
 		console.log(error.message);
@@ -301,6 +326,10 @@ const rejectFriendRequest = async (req, res) => {
 
 		await User.findByIdAndUpdate(loggedUserId, {
 			$pull: { notifications: { _id: notificationId } },
+		});
+
+		logger.info(`Odrzucono zaproszenie do znajomych od ${user.username}`, {
+			additionalInfo: loggedUser.username,
 		});
 
 		res.status(200).json({ message: 'Friend request rejected' });
@@ -346,6 +375,10 @@ const deleteFriend = async (req, res) => {
 
 		await User.findByIdAndUpdate(userId, {
 			$pull: { friends: { user_id: loggedUserId } },
+		});
+
+		logger.info(`Usunięto znajomego ${user.username}`, {
+			additionalInfo: loggedUser.username,
 		});
 
 		res.status(200).json({ message: 'Friend has been deleted' });

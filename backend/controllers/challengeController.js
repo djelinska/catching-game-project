@@ -1,6 +1,7 @@
 const { default: mongoose } = require('mongoose');
 const Challenge = require('../models/challengeModel');
 const User = require('../models/userModel');
+const logger = require('../logger');
 
 const addChallenge = async (req, res) => {
 	try {
@@ -53,6 +54,13 @@ const addChallenge = async (req, res) => {
 		await User.findByIdAndUpdate(opponentId, {
 			$push: { notifications: newNotification },
 		});
+
+		logger.info(
+			`Wysłano wyzwanie typu ${quantity} ${speed} do ${user.username}`,
+			{
+				additionalInfo: loggedUser.username,
+			}
+		);
 
 		res.status(201).json({
 			message: 'Challenge created successfully',
@@ -160,6 +168,13 @@ const acceptChallengeRequest = async (req, res) => {
 
 		await Challenge.findByIdAndDelete(challengeId);
 
+		logger.info(
+			`Zaakceptowano wyzwanie typu ${challenge.quantity} ${challenge.speed} od ${challengeUser.username}`,
+			{
+				additionalInfo: loggedUser.username,
+			}
+		);
+
 		res.status(200).json({ message: 'Challenge accepted' });
 	} catch (error) {
 		console.log(error.message);
@@ -176,11 +191,21 @@ const rejectChallengeRequest = async (req, res) => {
 			return res.status(400).json({ error: 'Challenge not found' });
 		}
 
+		const challengeUser = await User.findById(challenge.sender_id);
+		const loggedUser = await User.findById(req.user._id);
+
 		await User.findByIdAndUpdate(req.user._id, {
 			$pull: { notifications: { _id: notificationId } },
 		});
 
 		await Challenge.deleteOne({ _id: challengeId });
+
+		logger.info(
+			`Odrzucenie wyzwania typu ${challenge.quantity} ${challenge.speed} od ${challengeUser.username}`,
+			{
+				additionalInfo: loggedUser.username,
+			}
+		);
 
 		res.status(200).json({ message: 'Challenge rejected' });
 	} catch (error) {
