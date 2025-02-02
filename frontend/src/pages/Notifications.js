@@ -19,7 +19,6 @@ const Notifications = () => {
 	};
 
 	useEffect(() => {
-		console.log('ok pobieram');
 		if (user && !isLoading) {
 			getNotifications();
 		}
@@ -34,23 +33,11 @@ const Notifications = () => {
 				<div className='flex flex-col space-y-4 max-h-[660px] overflow-y-scroll'>
 					{notifications.map((notification) =>
 						notification.type === 'friendRequest' ? (
-							<FriendRequest
-								key={notification._id}
-								notificationObject={notification}
-								afterAction={getNotifications}
-							/>
+							<FriendRequest key={notification._id} notificationObject={notification} afterAction={getNotifications} />
 						) : notification.type === 'challengeRequest' ? (
-							<ChallengeRequestNotification
-								key={notification._id}
-								notificationObject={notification}
-								afterAction={getNotifications}
-							/>
+							<ChallengeRequestNotification key={notification._id} notificationObject={notification} afterAction={getNotifications} />
 						) : (
-							<ChallengeResultNotification
-								key={notification._id}
-								win={true}
-								notificationObject={notification}
-							/>
+							<ChallengeResultNotification key={notification._id} win={true} notificationObject={notification} />
 						)
 					)}
 				</div>

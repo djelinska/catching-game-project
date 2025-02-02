@@ -11,11 +11,8 @@ const FriendCard = ({ userObject, afterDelete }) => {
 	const { user } = useAuthContext();
 
 	const handleDeleteFriend = async (userId) => {
-		console.log(userId);
-
 		if (user) {
 			if (!isLoading) {
-				console.log('Ok usuwam');
 				await updateData('users/friends/delete', { userId: userId });
 				afterDelete();
 			}
@@ -25,39 +22,20 @@ const FriendCard = ({ userObject, afterDelete }) => {
 	return (
 		<div className='bg-green-400 w-full p-6 rounded'>
 			<div className='w-full flex items-center justify-between gap-2'>
-				<UsernameDisplay
-					username={userObject.username}
-					iconBackground={true}
-					size='large'
-					profilePath={true}
-				/>
-				{userObject.status === 'accepted' && (
-					<Button
-						icon={PiXBold}
-						color='secondary'
-						size='small'
-						onClickAction={() => handleDeleteFriend(userObject.user_id)}
-					/>
-				)}
+				<UsernameDisplay username={userObject.username} iconBackground={true} size='large' profilePath={true} />
+				{userObject.status === 'accepted' && <Button icon={PiXBold} color='secondary' size='small' onClickAction={() => handleDeleteFriend(userObject.user_id)} />}
 			</div>
 			{userObject.status === 'accepted' && (
 				<div className='flex gap-6 justify-center mt-6'>
 					<Link to={`/game/challenge?userId=${userObject.user_id}`}>
-						<Button
-							label='Challenge'
-							icon={PiSwordFill}
-							color='secondary'
-							size='small'
-						/>
+						<Button label='Challenge' icon={PiSwordFill} color='secondary' size='small' />
 					</Link>
 					<Link to={`/chat?userId=${userObject.user_id}`}>
 						<Button icon={PiChatCenteredFill} color='secondary' size='small' />
 					</Link>
 				</div>
 			)}
-			{userObject.status === 'pending' && (
-				<div className=' uppercase mt-6'>Pending Friend Request</div>
-			)}
+			{userObject.status === 'pending' && <div className=' uppercase mt-6'>Pending Friend Request</div>}
 		</div>
 	);
 };

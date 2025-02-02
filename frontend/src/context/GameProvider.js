@@ -23,21 +23,18 @@ function gameReducer(state, action) {
 		case 'RESET_STATE':
 			return initialGameState;
 		case 'GET_NEW_GAME':
-			console.log('Nowa gra');
 			return {
 				...state,
 				isNewGame: true,
 				gameOptionsStep: 1,
 			};
 		case 'SET_CAT_QUANTITY':
-			console.log('Ustawiono ilosc', action.quantity);
 			return {
 				...state,
 				gameOptions: { ...state.gameOptions, quantity: action.quantity },
 				gameOptionsStep: 2,
 			};
 		case 'SET_CAT_SPEED':
-			console.log('Ustawiono predkosc', action.speed);
 			return {
 				...state,
 				gameOptions: { ...state.gameOptions, speed: action.speed },

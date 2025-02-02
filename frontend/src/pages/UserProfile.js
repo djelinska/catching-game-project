@@ -36,8 +36,6 @@ const UserProfile = () => {
 	};
 
 	const handleAddComment = async () => {
-		console.log(commentInput);
-
 		if (commentInput !== '' && !updatedCommentId) {
 			await postData('comments', {
 				profileUsername: username,
@@ -74,20 +72,7 @@ const UserProfile = () => {
 	}, [user]);
 
 	const getMonthName = (monthNumber) => {
-		const months = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
+		const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 		return months[monthNumber - 1];
 	};
@@ -98,12 +83,7 @@ const UserProfile = () => {
 			{profile && (
 				<>
 					<div className='bg-green-400 p-6 rounded flex flex-col gap-6 items-center'>
-						<UsernameDisplay
-							username={profile.username}
-							iconBackground={true}
-							size='large'
-							date={`${getMonthName(profile.month)} ${profile.year}`}
-						/>
+						<UsernameDisplay username={profile.username} iconBackground={true} size='large' date={`${getMonthName(profile.month)} ${profile.year}`} />
 						<TotalScore totalScore={profile.stats.total_score} />
 					</div>
 					<div className='grid grid-cols-6 gap-2'>
@@ -111,13 +91,9 @@ const UserProfile = () => {
 					</div>
 					<div className='grid grid-cols-6 gap-2'>
 						<p className='text-center'>{profile.stats.play_count}</p>
-						<p className='text-center'>
-							{profile.stats.const_speed_total_score}
-						</p>
+						<p className='text-center'>{profile.stats.const_speed_total_score}</p>
 						<p className='text-center'>{profile.stats.dec_speed_total_score}</p>
-						<p className='text-center'>
-							{profile.stats.rand_speed_total_score}
-						</p>
+						<p className='text-center'>{profile.stats.rand_speed_total_score}</p>
 						<p className='text-center'>0</p>
 						<p className='text-center'>0</p>
 					</div>
@@ -128,23 +104,13 @@ const UserProfile = () => {
 								{comments.map((comment) => (
 									<div key={comment._id} className='p-4 bg-green-400 rounded'>
 										<div className='flex gap-4 mb-2'>
-											<UsernameDisplay
-												username={comment.author_username}
-												iconBackground={true}
-												size='small'
-												reversed={false}
-												profilePath={false}
-											/>
+											<UsernameDisplay username={comment.author_username} iconBackground={true} size='small' reversed={false} profilePath={false} />
 											{comment.author_username === user.username && (
 												<>
-													<button
-														onClick={() => setUpdatedCommentId(comment._id)}
-													>
+													<button onClick={() => setUpdatedCommentId(comment._id)}>
 														<PiPenFill />
 													</button>
-													<button
-														onClick={() => handleDeleteComment(comment._id)}
-													>
+													<button onClick={() => handleDeleteComment(comment._id)}>
 														<PiTrashFill />
 													</button>
 												</>
@@ -155,18 +121,8 @@ const UserProfile = () => {
 								))}
 							</div>
 							<div className='bg-green-500 pt-4 flex items-center space-x-6'>
-								<MessageInput
-									name='message'
-									value={commentInput}
-									type='comment'
-									onChangeAction={(e) => setCommentInput(e.target.value)}
-								/>
-								<Button
-									icon={PiPaperPlaneRightFill}
-									color='primary'
-									size='large'
-									onClickAction={handleAddComment}
-								/>
+								<MessageInput name='message' value={commentInput} type='comment' onChangeAction={(e) => setCommentInput(e.target.value)} />
+								<Button icon={PiPaperPlaneRightFill} color='primary' size='large' onClickAction={handleAddComment} />
 							</div>
 						</>
 					)}

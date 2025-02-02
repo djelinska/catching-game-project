@@ -8,8 +8,7 @@ import usePost from '../../hooks/usePost';
 import useUpdate from '../../hooks/useUpdate';
 
 const GameBoard = () => {
-	const { state, setCurrentIteration, setHearts, gameEnd, checkWin } =
-		useGameInfo();
+	const { state, setCurrentIteration, setHearts, gameEnd, checkWin } = useGameInfo();
 	const [catTilePosition, setCatTilePosition] = useState(null);
 	const [decSpeedCurrentDuration, setDecSpeedCurrentDuration] = useState(5000);
 	const [decSpeedDurationStep, setDecSpeedDurationStep] = useState(null);
@@ -71,33 +70,20 @@ const GameBoard = () => {
 		setScoreRecorded(true);
 		if (state.isGameStarted) {
 			if (state.gameOptions.speed === 'dec') {
-				setDecSpeedDurationStep(
-					(decSpeedCurrentDuration - 500) / (state.gameOptions.quantity - 1)
-				);
+				setDecSpeedDurationStep((decSpeedCurrentDuration - 500) / (state.gameOptions.quantity - 1));
 			}
 
-			makeGameIteration(
-				state.currentIteration,
-				getDurationTime(state.gameOptions.speed),
-				state.gameOptions.quantity,
-				state.currentIteration - state.collectedCats
-			);
+			makeGameIteration(state.currentIteration, getDurationTime(state.gameOptions.speed), state.gameOptions.quantity, state.currentIteration - state.collectedCats);
 		}
 	}, [state.isGameStarted]);
 
 	useEffect(() => {
 		if (state.currentIteration > 0) {
 			setHearts(state.currentIteration - 1 - state.collectedCats);
-			setDecSpeedCurrentDuration(
-				(prevDuration) => prevDuration - decSpeedDurationStep
-			);
+			setDecSpeedCurrentDuration((prevDuration) => prevDuration - decSpeedDurationStep);
 
-			if (
-				state.currentIteration > state.gameOptions.quantity ||
-				state.currentIteration - state.collectedCats > 3
-			) {
-				const win =
-					state.currentIteration - state.collectedCats > 3 ? false : true;
+			if (state.currentIteration > state.gameOptions.quantity || state.currentIteration - state.collectedCats > 3) {
+				const win = state.currentIteration - state.collectedCats > 3 ? false : true;
 				checkWin(win);
 				setCatTilePosition(null);
 				gameEnd();
@@ -112,18 +98,12 @@ const GameBoard = () => {
 					recordGameScore(win);
 				}
 			} else {
-				makeGameIteration(
-					state.currentIteration,
-					getDurationTime(state.gameOptions.speed),
-					state.gameOptions.quantity,
-					state.currentIteration - state.collectedCats
-				);
+				makeGameIteration(state.currentIteration, getDurationTime(state.gameOptions.speed), state.gameOptions.quantity, state.currentIteration - state.collectedCats);
 			}
 		}
 	}, [state.currentIteration]);
 
 	function makeGameIteration(iteration, duration, maxQuantity, missedHearts) {
-		console.log(duration);
 		setTimeout(() => {
 			setCurrentIteration();
 			if (iteration >= maxQuantity || missedHearts > 3) {
@@ -155,13 +135,7 @@ const GameBoard = () => {
 
 	return (
 		<div className='w-full aspect-square grid grid-cols-8 grid-rows-8 gap-2 mr-6 relative'>
-			{[...Array(TILES_NUMBER)].map((tile, index) =>
-				index === catTilePosition ? (
-					<CatTile key={index} />
-				) : (
-					<Tile key={index} />
-				)
-			)}
+			{[...Array(TILES_NUMBER)].map((tile, index) => (index === catTilePosition ? <CatTile key={index} /> : <Tile key={index} />))}
 		</div>
 	);
 };
